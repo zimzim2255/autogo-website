@@ -4,12 +4,15 @@
   "description": "Car Dealer Website - Frontend Only (Astro)",
   "scripts": {
     "dev": "astro dev",
-"build": "node node_modules/astro/bin/astro.js build",
+    "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "astro": "^4.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
 }
