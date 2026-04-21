@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "208",
+    "brand": "Peugeot",
+    "year": 2024,
+    "price": "250",
+    "currency": "DH",
+    "slug": "peugeot-208",
+    "image": "https://res.cloudinary.com/dqlr9mio4/image/upload/v1776687145/erasebg-transformed-1_m1qph0.avif",
+    "description": "Citadine économique et écologique, parfaite pour la ville",
+    "mileage": "0 km",
+    "transmission": "Automatique",
+    "fuelType": "Électrique",
+    "category": "Compact"
+  },
+  {
+    "id": 2,
+    "name": "Logan",
+    "brand": "Dacia",
+    "year": 2024,
+    "price": "200",
+    "currency": "DH",
+    "slug": "dacia-logan",
+    "image": "https://res.cloudinary.com/dqlr9mio4/image/upload/v1776686149/JiRNGocgD2jqDjNSvDk3_iw7rt6.webp",
+    "description": "Berline spacieuse et économique",
+    "mileage": "0 km",
+    "transmission": "Manuelle",
+    "fuelType": "Essence",
+    "category": "Sedan"
+  },
+  {
+    "id": 3,
+    "name": "Rifter",
+    "brand": "Peugeot",
+    "year": 2024,
+    "price": "300",
+    "currency": "DH",
+    "slug": "peugeot-rifter",
+    "image": "https://res.cloudinary.com/dqlr9mio4/image/upload/v1776687145/erasebg-transformed_gxznqk.avif",
+    "description": "SUV familial spacieux et flexible",
+    "mileage": "0 km",
+    "transmission": "Automatique",
+    "fuelType": "Diesel",
+    "category": "Family"
+  },
+  {
+    "id": 4,
+    "name": "Tonale",
+    "brand": "Alfa Romeo",
+    "year": 2024,
+    "price": "350",
+    "currency": "DH",
+    "slug": "alfa-romeo-tonale",
+    "image": "/cars/Trim-Tonale_Speciale.png",
+    "description": "SUV premium italien élégant et performant",
+    "mileage": "0 km",
+    "transmission": "Automatique",
+    "fuelType": "Hybride",
+    "category": "SUV"
+  }
+]

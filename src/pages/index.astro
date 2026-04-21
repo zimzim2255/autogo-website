@@ -1,0 +1,1560 @@
+---
+import Navbar from '../components/Navbar.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="AutoGo">
+  <Navbar />
+  
+<section class="hero-section">
+  <div class="hero-bg">
+    <img 
+      src="https://res.cloudinary.com/dqlr9mio4/image/upload/v1776682684/1776290420431-1542e3e1-4a2f-4e8c-9c5f-69fac513bce6_bgjbp7.png" 
+      alt="Lamborghini Aventador"
+      class="bg-image"
+    />
+    <div class="bg-overlay"></div>
+  </div>
+
+  <div class="video-container">
+    <div class="video-wrapper">
+      <video 
+        class="hero-video"
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        poster="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80"
+      >
+        <source src="https://res.cloudinary.com/dqlr9mio4/video/upload/q_auto/f_auto/v1776288283/Range_Rover_Sport_Velocity_Blue_featuring_Theo_James_ywvvfw.mp4" type="video/mp4">
+      </video>
+      
+        <div class="video-overlay">
+          <span class="brand-text">AUTOGO</span>
+          <h1 class="main-text">LOCATION DE VÉHICULES</h1>
+        </div>
+
+      
+    </div>
+  </div>
+</section>
+
+<section class="booking-bar">
+  <div class="bar-segment">
+    <select class="bar-select" id="vehicleSelect">
+      <option value="">Sélectionner un véhicule</option>
+      <option value="peugeot-208" data-price="250">Peugeot 208 - 250DH/jour</option>
+      <option value="dacia-logan" data-price="200">Dacia Logan - 200DH/jour</option>
+      <option value="peugeot-rifter" data-price="300">Peugeot Rifter - 300DH/jour</option>
+    </select>
+  </div>
+  <div class="bar-divider"></div>
+  <div class="bar-segment date-segment">
+    <label for="pickupDate" class="date-label">
+      <span class="date-label-text">Date de retrait</span>
+      <input type="date" class="bar-input date-input" id="pickupDate" placeholder="Date de retrait" aria-label="Date de retrait">
+    </label>
+    <label for="dropoffDate" class="date-label">
+      <span class="date-label-text">Date de retour</span>
+      <input type="date" class="bar-input date-input" id="dropoffDate" placeholder="Date de retour" aria-label="Date de retour">
+    </label>
+  </div>
+  <div class="bar-divider"></div>
+  <div class="bar-segment">
+    <label for="locationInput" class="text-label">
+      <span class="text-label-text">Point de retrait</span>
+      <input type="text" class="bar-input text-input" id="locationInput" placeholder="Point de retrait" aria-label="Point de retrait">
+    </label>
+  </div>
+  <div class="bar-divider"></div>
+  <div class="bar-segment">
+    <label for="phoneInput" class="text-label">
+      <span class="text-label-text">Téléphone</span>
+      <input type="tel" class="bar-input text-input" id="phoneInput" placeholder="+212 6XX XXX XXX" aria-label="Numéro de téléphone">
+    </label>
+  </div>
+  <div class="bar-divider"></div>
+  <button class="cta-book" id="bookBtn">RÉSERVER →</button>
+</section>
+
+<section class="cars-grid">
+  <div class="grid-container">
+    <a href="/car/peugeot-208" class="grid-cell">
+      <div class="cell-content">
+        <span class="model-name">Peugeot 208</span>
+        <span class="learn-more">En savoir plus &rarr;</span>
+      </div>
+      <img 
+        src="https://res.cloudinary.com/dqlr9mio4/image/upload/v1776687145/erasebg-transformed-1_m1qph0.avif" 
+        alt="Peugeot 208"
+        class="car-image"
+      />
+    </a>
+    <a href="/car/dacia-logan" class="grid-cell">
+      <div class="cell-content">
+        <span class="model-name">Dacia Logan</span>
+        <span class="learn-more">En savoir plus &rarr;</span>
+      </div>
+      <img 
+        src="https://res.cloudinary.com/dqlr9mio4/image/upload/v1776686149/JiRNGocgD2jqDjNSvDk3_iw7rt6.webp" 
+        alt="Dacia Logan"
+        class="car-image"
+      />
+    </a>
+    <a href="/car/peugeot-rifter" class="grid-cell">
+      <div class="cell-content">
+        <span class="model-name">Peugeot Rifter</span>
+        <span class="learn-more">En savoir plus &rarr;</span>
+      </div>
+      <img 
+        src="https://res.cloudinary.com/dqlr9mio4/image/upload/v1776687145/erasebg-transformed_gxznqk.avif" 
+        alt="Peugeot Rifter"
+        class="car-image"
+      />
+    </a>
+    <a href="/coming-soon" class="grid-cell">
+      <div class="cell-content">
+        <span class="model-name">Alfa Romeo Tonale</span>
+        <span class="learn-more">En savoir plus &rarr;</span>
+      </div>
+      <img 
+        src="/cars/Trim-Tonale_Speciale.png" 
+        alt="Alfa Romeo Tonale"
+        class="car-image"
+      />
+    </a>
+  </div>
+</section>
+
+<section class="service-nav">
+  <div class="service-list">
+    <a href="/contact" class="service-item">
+      <span>Find a retailer</span>
+      <span class="arrow"><svg viewBox="0 0 14 24" height="64px" role="presentation"><path d="m13.75 12-12-12L.693 1.058 11.635 12 .693 22.943 1.75 24z" fill="currentColor"></path></svg></span>
+    </a>
+    <a href="/services" class="service-item">
+      <span>Fleet & business</span>
+      <span class="arrow"><svg viewBox="0 0 14 24" height="64px" role="presentation"><path d="m13.75 12-12-12L.693 1.058 11.635 12 .693 22.943 1.75 24z" fill="currentColor"></path></svg></span>
+    </a>
+    <a href="/faq" class="service-item">
+      <span>Newsletter sign up</span>
+      <span class="arrow"><svg viewBox="0 0 14 24" height="64px" role="presentation"><path d="m13.75 12-12-12L.693 1.058 11.635 12 .693 22.943 1.75 24z" fill="currentColor"></path></svg></span>
+    </a>
+  </div>
+</section>
+
+<section class="sustainability-hero">
+  <img 
+    src="https://media.cdn-jaguarlandrover.com/api/v2/images/119688/w/1600.jpg" 
+    alt="Durabilité"
+    class="sustainability-image"
+  />
+  <div class="sustainability-content">
+    <h2 class="sustainability-title">
+      <span>Durabilité</span>
+      <span>Transparence totale sur nos faits</span>
+    </h2>
+    <p class="sustainability-text">Nous croyons en la transparence totale sur notre impact environnemental. De la fabrication à la fin de vie, chaque étape compte.</p>
+    <a href="/sustainability" class="read-more">En savoir plus <span class="arrow">&rarr;</span></a>
+  </div>
+</section>
+
+<section class="charging-section">
+  <div class="charging-content">
+    <div class="charging-row">
+      <h2 class="charging-title"><svg viewBox="0 0 19 24" height="74px" role="presentation" style="color: #B6FF00"><path d="M1.028 2v1.492h14.414L.502 18.44l1.058 1.065L16.507 4.558v14.414H18V2z" fill="currentColor"></path></svg> Recharge</h2>
+      <div class="charging-text-link">
+        <p class="charging-text">Rechargez chez vous avec nos solutions de recharge intelligentes. Rapide, efficace et pratique pour votre conduite quotidienne.</p>
+        <a href="/charging" class="charging-link">Recharge à domicile <span class="arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lifestyle-section">
+  <div class="lifestyle-gallery">
+    <div class="gallery-item gallery-content">
+      <h2 class="lifestyle-title">Services</h2>
+      <p class="lifestyle-subtitle">Découvrez nos services de location de véhicules électriques. Des solutions flexibles et adaptées à tous vos besoins de mobilité.</p>
+      <a href="/contact" class="lifestyle-btn">En savoir plus <span class="arrow">&rarr;</span></a>
+    </div>
+    <div class="gallery-item">
+      <img src="https://bmw.scene7.com/is/image/BMW/emob_teaser_costs-electric-vehicle_02-1:3to2?fmt=webp&wid=1493&fit=constrain%2C1" alt="Véhicule Électrique BMW" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://bmw.scene7.com/is/image/BMW/emob_bev_phev_teaser_02:3to2?fmt=webp&wid=1493&fit=constrain%2C1" alt="BMW BEV PHEV" />
+    </div>
+  </div>
+  <div class="lifestyle-nav">
+    <a href="/contact" class="nav-item">Trouver un revendeur <span class="arrow">&rarr;</span></a>
+    <a href="/services" class="nav-item">Flotte et entreprises <span class="arrow">&rarr;</span></a>
+    <a href="/faq" class="nav-item">S'inscrire à la newsletter <span class="arrow">&rarr;</span></a>
+   </div>
+   </section>
+
+ <style>
+  .hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0.4) 0%,
+      rgba(10, 10, 10, 0.6) 50%,
+      rgba(10, 10, 10, 0.9) 100%
+    );
+  }
+
+  .video-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+
+   .video-wrapper {
+     position: relative;
+     width: 100%;
+     max-width: 480px;
+     aspect-ratio: 9 / 16;
+     border-radius: 16px;
+     overflow: hidden;
+     box-shadow: 
+       0 0 60px rgba(0, 0, 0, 0.8),
+       0 0 100px rgba(143, 179, 57, 0.1);
+   }
+
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+   .video-overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     pointer-events: none;
+     z-index: 5;
+     text-align: center;
+     padding: 20px;
+   }
+
+   .brand-text {
+     font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+     font-size: 10px;
+     font-weight: 600;
+     letter-spacing: 5px;
+     text-transform: uppercase;
+     color: #ffffff;
+     margin-bottom: 8px;
+     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+   }
+
+   .main-text {
+     font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+     font-size: 32px;
+     font-weight: 700;
+     letter-spacing: 8px;
+     text-transform: uppercase;
+     color: #ffffff;
+     text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+   }
+
+   @media (max-width: 768px) {
+     .video-wrapper {
+       max-width: 320px;
+     }
+
+    .main-text {
+      font-size: 24px;
+      letter-spacing: 6px;
+    }
+
+    .brand-text {
+      font-size: 8px;
+      letter-spacing: 3px;
+    }
+  }
+
+  .cars-grid {
+    padding: 0;
+    width: 100%;
+  }
+
+  .booking-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #111111;
+    border-radius: 50px;
+    padding: 8px 8px;
+    width: 90%;
+    max-width: 1400px;
+    margin: -40px auto 48px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    gap: 0;
+  }
+
+  .bar-segment {
+    flex: 1;
+    min-width: 0;
+    padding: 16px 20px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bar-segment:hover {
+    background: rgba(255,255,255,0.05);
+  }
+
+  .bar-segment .main {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .bar-segment .sub {
+    display: block;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+  }
+
+   .bar-select {
+     width: 100%;
+     background: transparent;
+     border: none;
+     color: #fff;
+     font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+     font-size: 14px;
+     font-weight: 600;
+     cursor: pointer;
+     outline: none;
+     padding: 0;
+     min-height: 44px;
+   }
+
+   .bar-select::-ms-expand {
+     display: none;
+   }
+
+   .date-btn {
+     display: none;
+     flex: 1;
+     min-width: 45%;
+     padding: 12px 16px;
+     background: transparent;
+     border: 1px solid rgba(255,255,255,0.3);
+     border-radius: 6px;
+     color: #fff;
+     font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+     font-size: 13px;
+     font-weight: 600;
+     cursor: pointer;
+     outline: none;
+     text-align: center;
+     touch-action: manipulation;
+   }
+
+   .date-btn:hover {
+     border-color: rgba(255,255,255,0.6);
+   }
+
+   .date-label {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     gap: 12px;
+     flex: 1;
+     min-width: 0;
+     cursor: pointer;
+     position: relative;
+   }
+
+   .date-label-text {
+     display: none;
+     font-size: 11px;
+     color: rgba(255,255,255,0.6);
+     white-space: nowrap;
+     flex-shrink: 0;
+     letter-spacing: 0.5px;
+     text-transform: uppercase;
+     font-weight: 500;
+   }
+
+   .bar-segment.date-segment {
+     display: flex;
+     flex-direction: row;
+     gap: 16px;
+     align-items: center;
+     justify-content: flex-start;
+     flex: 1.5;
+     padding: 12px 20px;
+   }
+
+   .date-input {
+     flex: 1;
+     background: rgba(255,255,255,0.05);
+     border: none;
+     border-bottom: 1.5px solid rgba(255,255,255,0.25);
+     color: #fff;
+     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+     font-size: 15px;
+     font-weight: 400;
+     letter-spacing: 0.3px;
+     cursor: pointer;
+     outline: none;
+     padding: 14px 12px 12px 12px;
+     min-height: 48px;
+     min-width: 140px;
+     transition: all 0.3s ease;
+     border-radius: 2px;
+   }
+
+   .date-input:hover {
+     background: rgba(255,255,255,0.08);
+     border-bottom-color: rgba(255,255,255,0.4);
+   }
+
+   .date-input:focus {
+     background: rgba(255,255,255,0.1);
+     border-bottom-color: #B6FF00;
+     box-shadow: inset 0 -2px 0 #B6FF00;
+   }
+
+   .date-input::placeholder {
+     color: rgba(255,255,255,0.4);
+     font-size: 13px;
+     letter-spacing: 1px;
+   }
+
+   .date-input::-webkit-calendar-picker-indicator {
+     filter: invert(1) brightness(0.9);
+     cursor: pointer;
+     padding: 6px;
+     margin: 0 4px 0 8px;
+     width: 20px;
+     height: 20px;
+     opacity: 0.6;
+     transition: opacity 0.3s ease;
+   }
+
+   .date-input:hover::-webkit-calendar-picker-indicator {
+     opacity: 1;
+   }
+
+   .date-input::-webkit-outer-spin-button,
+   .date-input::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+   }
+
+   .text-label {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     gap: 12px;
+     flex: 1;
+     min-width: 0;
+     cursor: text;
+     position: relative;
+   }
+
+   .text-label-text {
+     display: none;
+     font-size: 11px;
+     color: rgba(255,255,255,0.6);
+     white-space: nowrap;
+     flex-shrink: 0;
+     letter-spacing: 0.5px;
+     text-transform: uppercase;
+     font-weight: 500;
+   }
+
+   .text-input {
+     flex: 1;
+     background: rgba(255,255,255,0.05);
+     border: none;
+     border-bottom: 1.5px solid rgba(255,255,255,0.25);
+     color: #fff;
+     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+     font-size: 15px;
+     font-weight: 400;
+     letter-spacing: 0.3px;
+     outline: none;
+     padding: 14px 12px 12px 12px;
+     min-height: 48px;
+     min-width: 140px;
+     transition: all 0.3s ease;
+     border-radius: 2px;
+   }
+
+   .text-input:hover {
+     background: rgba(255,255,255,0.08);
+     border-bottom-color: rgba(255,255,255,0.4);
+   }
+
+   .text-input:focus {
+     background: rgba(255,255,255,0.1);
+     border-bottom-color: #B6FF00;
+     box-shadow: inset 0 -2px 0 #B6FF00;
+   }
+
+   .text-input::placeholder {
+     color: rgba(255,255,255,0.4);
+     font-size: 13px;
+     letter-spacing: 0.5px;
+   }
+
+  .bar-select option {
+    background: #111;
+    color: #fff;
+  }
+
+   .bar-input {
+     width: 100%;
+     background: transparent;
+     border: none;
+     color: #fff;
+     font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+     font-size: 14px;
+     font-weight: 600;
+     cursor: pointer;
+     outline: none;
+     padding: 12px 8px;
+     min-height: 44px;
+     touch-action: manipulation;
+   }
+
+   .bar-input::placeholder {
+     color: rgba(255,255,255,0.5);
+   }
+
+   .bar-input::-webkit-calendar-picker-indicator {
+     filter: invert(1);
+     cursor: pointer;
+     padding: 8px;
+     margin: -8px;
+   }
+
+  .bar-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.15);
+    flex-shrink: 0;
+  }
+
+  .cta-book {
+    background: #B6FF00;
+    color: #000;
+    border: none;
+    border-radius: 40px;
+    padding: 14px 28px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.2s, background 0.2s;
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    margin-left: 8px;
+    flex-shrink: 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cta-book:hover {
+    transform: scale(1.03);
+    background: #9FE600;
+  }
+
+   @media (max-width: 480px) {
+     .booking-bar {
+       flex-direction: column;
+       border-radius: 16px;
+       padding: 12px;
+       gap: 12px;
+       width: 95%;
+     }
+
+     .bar-segment {
+       width: 100%;
+       padding: 12px 12px;
+       min-height: auto;
+     }
+
+     .bar-segment.date-segment {
+       flex-direction: column;
+       gap: 14px;
+       padding: 12px;
+       min-height: auto;
+     }
+
+     .date-label {
+       flex-direction: column;
+       gap: 8px;
+       align-items: flex-start;
+       width: 100%;
+     }
+
+     .date-label-text {
+       display: block;
+       font-size: 11px;
+       color: rgba(255,255,255,0.6);
+       letter-spacing: 0.5px;
+       text-transform: uppercase;
+     }
+
+     .date-input {
+       width: 100%;
+       min-width: auto;
+       padding: 14px 12px 12px 12px;
+       font-size: 16px;
+       min-height: 50px;
+       background: rgba(255,255,255,0.08);
+       border-bottom: 1.5px solid rgba(255,255,255,0.3);
+     }
+
+     .text-label {
+       flex-direction: column;
+       gap: 8px;
+       align-items: flex-start;
+       width: 100%;
+     }
+
+     .text-label-text {
+       display: block;
+       font-size: 11px;
+       color: rgba(255,255,255,0.6);
+       letter-spacing: 0.5px;
+       text-transform: uppercase;
+     }
+
+     .text-input {
+       width: 100%;
+       min-width: auto;
+       padding: 14px 12px 12px 12px;
+       font-size: 16px;
+       min-height: 50px;
+       background: rgba(255,255,255,0.08);
+       border-bottom: 1.5px solid rgba(255,255,255,0.3);
+     }
+
+     .bar-divider {
+       width: 100%;
+       height: 1px;
+       flex-shrink: 0;
+     }
+
+     .cta-book {
+       width: 100%;
+       margin-left: 0;
+       margin-top: 0;
+       padding: 14px 16px;
+     }
+
+     .bar-select {
+       font-size: 16px;
+       padding: 0;
+     }
+   }
+
+   @media (min-width: 481px) and (max-width: 768px) {
+     .booking-bar {
+       flex-direction: column;
+       border-radius: 24px;
+       padding: 16px;
+       gap: 12px;
+       width: 92%;
+     }
+
+     .bar-segment {
+       width: 100%;
+       padding: 14px 16px;
+       min-height: auto;
+     }
+
+     .bar-segment.date-segment {
+       flex-direction: row;
+       gap: 14px;
+       padding: 12px 16px;
+       min-height: auto;
+     }
+
+     .date-label {
+       flex-direction: column;
+       gap: 6px;
+       align-items: flex-start;
+       flex: 1;
+     }
+
+     .date-label-text {
+       display: block;
+       font-size: 10px;
+       color: rgba(255,255,255,0.5);
+       letter-spacing: 0.4px;
+     }
+
+     .date-input {
+       width: 100%;
+       min-width: auto;
+       padding: 12px 10px 10px 10px;
+       font-size: 14px;
+       min-height: 45px;
+       background: rgba(255,255,255,0.06);
+       border-bottom: 1.5px solid rgba(255,255,255,0.25);
+     }
+
+     .text-label {
+       flex-direction: column;
+       gap: 6px;
+       align-items: flex-start;
+       flex: 1;
+     }
+
+     .text-label-text {
+       display: block;
+       font-size: 10px;
+       color: rgba(255,255,255,0.5);
+       letter-spacing: 0.4px;
+     }
+
+     .text-input {
+       width: 100%;
+       min-width: auto;
+       padding: 12px 10px 10px 10px;
+       font-size: 14px;
+       min-height: 45px;
+       background: rgba(255,255,255,0.06);
+       border-bottom: 1.5px solid rgba(255,255,255,0.25);
+     }
+
+     .bar-divider {
+       width: 100%;
+       height: 1px;
+     }
+
+     .cta-book {
+       width: 100%;
+       margin-left: 0;
+       margin-top: 4px;
+       padding: 14px 20px;
+     }
+   }
+
+   @media (min-width: 769px) and (max-width: 1024px) {
+     .booking-bar {
+       flex-wrap: wrap;
+       border-radius: 32px;
+       padding: 10px 10px;
+       max-width: 100%;
+       width: 95%;
+       gap: 0;
+     }
+
+     .bar-segment {
+       padding: 14px 16px;
+       min-height: 48px;
+     }
+
+     .bar-segment.date-segment {
+       flex-direction: row;
+       gap: 14px;
+       padding: 12px 16px;
+     }
+
+     .date-label {
+       flex-direction: column;
+       gap: 4px;
+       align-items: flex-start;
+     }
+
+     .date-label-text {
+       display: none;
+     }
+
+     .date-input {
+       font-size: 13px;
+       padding: 12px 10px 10px 10px;
+       min-width: 130px;
+       background: rgba(255,255,255,0.06);
+       border-bottom: 1.5px solid rgba(255,255,255,0.25);
+     }
+
+     .text-label {
+       flex-direction: column;
+       gap: 4px;
+       align-items: flex-start;
+     }
+
+     .text-label-text {
+       display: none;
+     }
+
+     .text-input {
+       font-size: 13px;
+       padding: 12px 10px 10px 10px;
+       min-width: 130px;
+       background: rgba(255,255,255,0.06);
+       border-bottom: 1.5px solid rgba(255,255,255,0.25);
+     }
+
+     .cta-book {
+       padding: 14px 24px;
+       margin-left: 8px;
+     }
+   }
+
+   @media (min-width: 1025px) {
+     .booking-bar {
+       flex-wrap: nowrap;
+       border-radius: 50px;
+       padding: 8px 8px;
+     }
+
+     .bar-segment {
+       padding: 16px 20px;
+       min-height: 56px;
+     }
+
+     .bar-segment.date-segment {
+       flex-direction: row;
+       gap: 16px;
+       padding: 12px 20px;
+     }
+
+     .date-label {
+       flex-direction: row;
+       gap: 0;
+       align-items: center;
+     }
+
+     .date-label-text {
+       display: none;
+     }
+
+     .date-input {
+       font-size: 14px;
+       padding: 14px 12px 12px 12px;
+       min-width: 160px;
+       background: rgba(255,255,255,0.05);
+       border-bottom: 1.5px solid rgba(255,255,255,0.25);
+     }
+
+     .text-label {
+       flex-direction: row;
+       gap: 0;
+       align-items: center;
+     }
+
+     .text-label-text {
+       display: none;
+     }
+
+     .text-input {
+       font-size: 14px;
+       padding: 14px 12px 12px 12px;
+       min-width: 160px;
+       background: rgba(255,255,255,0.05);
+       border-bottom: 1.5px solid rgba(255,255,255,0.25);
+     }
+
+     .cta-book {
+       padding: 14px 28px;
+       margin-left: 12px;
+     }
+   }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    border-bottom: 0.3px solid #B6FF00;
+  }
+
+  .grid-cell {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-right: 0.3px solid #B6FF00;
+    border-bottom: 0.3px solid #B6FF00;
+    text-decoration: none;
+    display: block;
+  }
+
+  .grid-cell:nth-child(2) {
+    border-right: none;
+  }
+
+  .grid-cell:nth-child(3) {
+    border-bottom: 0.3px solid #B6FF00;
+  }
+
+  .grid-cell:nth-child(4) {
+    border-right: none;
+    border-bottom: 0.3px solid #B6FF00;
+  }
+
+  .cell-content {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .model-name {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .learn-more {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  .grid-cell:hover .learn-more {
+    opacity: 1;
+  }
+
+  .car-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    object-fit: contain;
+    object-position: center bottom;
+    transition: transform 0.5s ease;
+  }
+
+  .grid-cell:hover .car-image {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-cell {
+      aspect-ratio: auto;
+      border-right: none;
+      border-bottom: 0.3px solid #B6FF00;
+    }
+
+    .grid-cell:nth-child(2),
+    .grid-cell:nth-child(3),
+    .grid-cell:nth-child(4) {
+      border-right: none;
+      border-bottom: 0.3px solid #B6FF00;
+    }
+
+    .cell-content {
+      position: relative;
+      top: auto;
+      left: auto;
+      padding: 16px;
+    }
+
+    .car-image {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .model-name {
+      font-size: 20px;
+    }
+
+    .learn-more {
+      font-size: 12px;
+    }
+
+    .grid-cell:hover .car-image {
+      transform: none;
+    }
+  }
+
+  .service-nav {
+    margin-top: 60px;
+  }
+
+  .service-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 4px 24px;
+    text-decoration: none;
+    color: #000000;
+    font-size: 74px;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+  }
+
+  .service-item:hover {
+    opacity: 0.8;
+  }
+
+  .service-item .arrow {
+    color: #B6FF00;
+  }
+
+  @media (max-width: 768px) {
+    .service-nav {
+      margin-top: 40px;
+    }
+
+    .service-item {
+      font-size: 32px;
+      padding: 12px 16px;
+      max-width: 100%;
+    }
+
+    .service-item .arrow svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .sustainability-hero {
+    position: relative;
+    padding: 48px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #f5f5f5;
+  }
+
+  .sustainability-image {
+    width: 100vw;
+    height: 70vh;
+    object-fit: cover;
+    margin-left: calc(-50vw + 50%);
+  }
+
+  @media (max-width: 768px) {
+    .sustainability-image {
+      height: 70vh;
+      margin-left: calc(-50vw + 50%);
+    }
+
+    .sustainability-hero {
+      background: #111111;
+    }
+
+    .sustainability-content {
+      left: auto;
+      right: 16px;
+      transform: translateY(-50%);
+      text-align: right;
+    }
+  }
+
+  .sustainability-content {
+    position: absolute;
+    top: 50%;
+    right: 48px;
+    left: auto;
+    transform: translateY(-50%);
+    max-width: 600px;
+    width: 90%;
+    text-align: right;
+  }
+
+  .sustainability-title {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  .sustainability-title span {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .sustainability-text {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff;
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .read-more {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .read-more .arrow {
+    color: #B6FF00;
+  }
+
+.charging-section {
+    padding: 48px 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .charging-content {
+    max-width: 100%;
+  }
+
+  .charging-row {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .charging-text-link {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .charging-title {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 74px;
+    font-weight: 700;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .charging-text {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    opacity: 0.8;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .charging-link {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .charging-link .arrow {
+    color: #B6FF00;
+  }
+
+  @media (max-width: 768px) {
+    .sustainability-title {
+      font-size: 20px;
+    }
+
+    .charging-section {
+      padding: 32px 16px;
+    }
+
+    .charging-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .charging-title {
+      font-size: 36px;
+    }
+
+    .charging-title svg {
+      height: 36px !important;
+    }
+
+    .charging-text {
+      font-size: 14px;
+    }
+
+    .charging-link {
+      font-size: 14px;
+    }
+  }
+
+   .lifestyle-section {
+     padding: 48px 24px;
+     width: 100%;
+     box-sizing: border-box;
+   }
+
+   .lifestyle-gallery {
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     gap: 8px;
+     margin-bottom: 48px;
+     width: 100%;
+   }
+
+   .gallery-item {
+     position: relative;
+     overflow: hidden;
+     min-height: 300px;
+   }
+
+   .gallery-item img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     display: block;
+   }
+
+   .gallery-content {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     padding: 48px;
+     background-color: #f5f5f5;
+     height: 800px;
+   }
+
+  .lifestyle-title {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 74px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 24px;
+  }
+
+  .lifestyle-subtitle {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 18px;
+    color: #000000;
+    opacity: 0.8;
+    max-width: 600px;
+    margin-bottom: 24px;
+  }
+
+  .lifestyle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    border: 1px solid #B6FF00;
+    padding: 12px 24px;
+  }
+
+   .lifestyle-btn .arrow {
+     color: #B6FF00;
+   }
+
+   .lifestyle-btn:hover {
+     background: #f5f5f5;
+     color: #000000;
+   }
+
+   .lifestyle-btn:hover .arrow {
+     color: #000000;
+   }
+
+   .lifestyle-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 48px;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gallery-item:nth-child(2) {
+    border-left: none;
+    border-right: none;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 800px;
+    object-fit: cover;
+  }
+
+  .gallery-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px;
+    background-color: #f5f5f5;
+    height: 800px;
+  }
+
+  .gallery-content .lifestyle-title {
+    font-size: 48px;
+  }
+
+  .gallery-content .lifestyle-subtitle {
+    font-size: 16px;
+  }
+
+  .lifestyle-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .nav-item {
+    display: block;
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    padding: 24px 0;
+    border-bottom: 1px solid #B6FF00;
+  }
+
+  .nav-item .arrow {
+    color: #B6FF00;
+    margin-left: 8px;
+  }
+
+   @media (max-width: 768px) {
+     .lifestyle-section {
+       background-color: #F5F5F5;
+       max-width: 100%;
+       margin: 0;
+       padding: 48px 24px;
+     }
+
+     .lifestyle-gallery {
+       display: flex;
+       flex-direction: column;
+       margin-bottom: 32px;
+       gap: 0;
+     }
+
+     .gallery-content {
+       background-color: #F5F5F5;
+       padding: 32px 24px;
+       height: auto;
+       min-height: auto;
+       margin-bottom: 0;
+     }
+
+     .gallery-content .lifestyle-title {
+       font-size: 36px;
+       color: #000000;
+       margin-bottom: 16px;
+     }
+
+     .gallery-content .lifestyle-subtitle {
+       font-size: 15px;
+       color: #000000;
+       opacity: 1;
+       margin-bottom: 24px;
+       max-width: 100%;
+       line-height: 1.5;
+     }
+
+     .lifestyle-btn {
+       display: inline-flex;
+       align-self: flex-start;
+       background: transparent;
+       border: 1px solid #000000;
+       color: #000000;
+       padding: 10px 20px;
+       font-size: 14px;
+     }
+
+     .lifestyle-btn .arrow {
+       color: #000000;
+     }
+
+     .gallery-item {
+       display: none;
+     }
+
+     .gallery-item:first-child {
+       display: block;
+     }
+
+     .lifestyle-nav {
+       display: flex;
+       flex-direction: column;
+       gap: 0;
+     }
+
+     .nav-item {
+       color: #000000;
+       border-bottom: 1px solid #000000;
+       padding: 16px 0;
+       font-size: 16px;
+       text-align: left;
+     }
+
+     .nav-item .arrow {
+       color: #B6FF00;
+     }
+
+     .nav-item:last-child {
+       border-bottom: none;
+     }
+   }
+
+   .booking-bar .bar-segment input.date-input {
+     width: 100%;
+     background: transparent;
+     border: none;
+     color: #fff;
+     font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+     font-size: 14px;
+     font-weight: 600;
+     cursor: pointer;
+     outline: none;
+     padding: 12px 0;
+     min-height: 44px;
+   }
+
+   .booking-bar .bar-segment input.date-input::placeholder {
+     color: rgba(255,255,255,0.6);
+     font-weight: 400;
+   }
+
+   .booking-bar .bar-segment input.date-input::-webkit-calendar-picker-indicator {
+     filter: invert(1);
+     cursor: pointer;
+     padding: 8px;
+      margin: -8px;
+    }
+  </style>
+
+  <script>
+    // @ts-nocheck
+    const vehicleSelect = document.getElementById('vehicleSelect');
+  const pickupDate = document.getElementById('pickupDate');
+  const dropoffDate = document.getElementById('dropoffDate');
+  const locationInput = document.getElementById('locationInput');
+  const phoneInput = document.getElementById('phoneInput');
+  const bookBtn = document.getElementById('bookBtn');
+
+  bookBtn?.addEventListener('click', () => {
+    if (!vehicleSelect?.value) {
+      alert('Veuillez sélectionner un véhicule');
+      vehicleSelect?.focus();
+      return;
+    }
+    if (!pickupDate?.value) {
+      alert('Veuillez sélectionner une date de retrait');
+      pickupDate?.focus();
+      return;
+    }
+    if (!dropoffDate?.value) {
+      alert('Veuillez sélectionner une date de retour');
+      dropoffDate?.focus();
+      return;
+    }
+    if (!locationInput?.value) {
+      alert('Veuillez entrer un point de retrait');
+      locationInput?.focus();
+      return;
+    }
+    if (!phoneInput?.value) {
+      alert('Veuillez entrer votre numéro de téléphone');
+      phoneInput?.focus();
+      return;
+    }
+    
+    window.location.href = '/car/' + vehicleSelect.value + '?pickup=' + pickupDate.value + '&dropoff=' + dropoffDate.value + '&location=' + encodeURIComponent(locationInput.value) + '&phone=' + encodeURIComponent(phoneInput.value);
+  });
+</script>

@@ -1,0 +1,323 @@
+---
+---
+
+<nav class="navbar">
+  <a href="/" class="logo">
+    <img src="/logos/logo.png" alt="autogo" class="logo-img" />
+  </a>
+
+  <button class="icon-btn hamburger" id="menuBtn" aria-label="Menu">
+    <span class="menu-text">Menu</span>
+    <svg width="56" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <line x1="3" y1="8" x2="21" y2="8"/>
+      <line x1="3" y1="16" x2="21" y2="16"/>
+    </svg>
+  </button>
+</nav>
+
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-panel">
+    <div class="menu-header">
+      <a href="/" class="logo">
+        <img src="/logos/logo.png" alt="autogo" class="logo-img" />
+      </a>
+      <button class="close-btn" id="closeBtn" aria-label="Close">
+        <span class="close-text">Close</span>
+        <svg width="56" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="3" y1="3" x2="21" y2="21"/>
+          <line x1="21" y1="3" x2="3" y2="21"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="menu-content">
+      <div class="menu-categories">
+        <div class="category-item">
+          <a href="/cars">
+            <img src="https://hips.hearstapps.com/hmg-prod/images/2023-honda-cr-v-ex-l-awd-103-66295ff8362ee.jpg?crop=0.609xw:0.514xh;0.200xw,0.332xh&resize=700:*" alt="2026 Honda CR-V" title="2026 Honda CR-V" width="434" height="265" decoding="async" loading="lazy" />
+            <span>SUV</span>
+          </a>
+        </div>
+        <div class="category-item">
+          <a href="/cars">
+            <img src="https://www.peugeot.com/content/dam/peugeot/master/b2c/our-range/showroom/208/2023-10-new-208/mobile/PEUGEOT_E_208_2307STYP_090.jpg?imwidth=768" alt="New PEUGEOT E-208 Yellow Agueda charging at a private terminal" />
+            <span>Sedan</span>
+          </a>
+        </div>
+        <div class="category-item">
+          <a href="/cars">
+            <img src="https://www.seat.com/content/dam/public/seat-website/myco/2448/seat-cars/suv-cars/seat-ateca-suv-graphite-grey-colour.jpg" alt="SEAT Family cars – SEAT Ateca" title="SEAT Family cars – SEAT Ateca" />
+            <span>Family</span>
+          </a>
+        </div>
+        <div class="category-item">
+          <a href="/charging">
+            <img src="https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Homepage-Card-Model-3-Desktop-US_PR_MX.jpg" alt="Red Model 3" />
+            <span>Charging</span>
+          </a>
+        </div>
+      </div>
+      
+      <div class="menu-links">
+        <a href="/cars">Nos voitures</a>
+        <a href="/pricing">Tarifs</a>
+        <a href="/services">Services</a>
+        <a href="/about">À propos</a>
+        <a href="/contact">Contact</a>
+        <a href="/faq">FAQ</a>
+        <a href="/rental-conditions">Conditions</a>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const closeBtn = document.getElementById('closeBtn');
+  const menuOverlay = document.getElementById('menuOverlay');
+  
+  menuBtn?.addEventListener('click', () => {
+    menuOverlay?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+  
+  closeBtn?.addEventListener('click', () => {
+    menuOverlay?.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 40px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    height: 45px;
+    width: auto;
+  }
+
+  .icon-btn {
+    background: none;
+    border: none;
+    color: #B6FF00;
+    cursor: pointer;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .icon-btn:hover {
+    opacity: 0.8;
+  }
+
+  .icon-btn svg {
+    width: 32px;
+    height: 32px;
+  }
+    width: 56px;
+    height: 30px;
+  }
+
+  .menu-text {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #B6FF00;
+  }
+
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+  }
+
+  .menu-overlay.active {
+    transform: translateX(0);
+  }
+
+  .menu-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: #000000;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .close-btn:hover {
+    opacity: 0.8;
+  }
+
+  .close-text {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .menu-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px 48px;
+  }
+
+  .menu-categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .category-item a {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    color: #000000;
+  }
+
+  .category-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .category-item span {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .menu-links a {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #000000;
+    text-decoration: none;
+  }
+
+  .menu-links a:hover {
+    color: #B6FF00;
+  }
+
+  .menu-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 1px solid #B6FF00;
+  }
+
+  .menu-footer a {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 18px;
+    color: #000000;
+    text-decoration: none;
+  }
+
+  .menu-footer a:hover {
+    color: #B6FF00;
+  }
+
+  .region-selector {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 18px;
+    color: #000000;
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 16px 20px;
+    }
+
+    .logo-img {
+      height: 24px;
+    }
+
+    .menu-text {
+      display: none;
+    }
+
+    .icon-btn svg {
+      width: 32px;
+      height: 24px;
+    }
+
+    .menu-header {
+      padding: 16px 20px;
+    }
+
+    .menu-content {
+      padding: 0 20px 32px;
+    }
+
+    .menu-categories {
+      grid-template-columns: 1fr;
+    }
+
+    .menu-links a {
+      font-size: 24px;
+    }
+
+    .close-text {
+      display: none;
+    }
+  }
+</style>

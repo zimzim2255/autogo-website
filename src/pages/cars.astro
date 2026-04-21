@@ -1,0 +1,334 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import cars from '../data/cars.json';
+
+const brands = [...new Set(cars.map(car => car.brand))];
+const priceRanges = [
+  { label: 'Tous les prix', min: 0, max: Infinity },
+  { label: '200 dh/jour', min: 200, max: 200 },
+  { label: '250 dh/jour', min: 250, max: 250 },
+  { label: '300 dh/jour', min: 300, max: 300 },
+  { label: '350 dh+/jour', min: 350, max: Infinity }
+];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voitures | AutoGo</title>
+  </head>
+  <body>
+    <Navbar />
+    
+    <main class="cars-page">
+      <div class="page-header">
+        <h1>Voitures</h1>
+        <p>Découvrez notre collection de véhicules</p>
+      </div>
+
+      <div class="filters">
+        <div class="filter-group">
+          <label>Marque</label>
+          <select id="brandFilter">
+            <option value="">Toutes les marques</option>
+            {brands.map(brand => (
+              <option value={brand}>{brand}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Prix</label>
+          <select id="priceFilter">
+            {priceRanges.map(range => (
+              <option value={`${range.min}-${range.max}`}>{range.label}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Catégorie</label>
+          <select id="categoryFilter">
+            <option value="">Toutes les catégories</option>
+            <option value="Compact">Compact</option>
+            <option value="Sedan">Berline</option>
+            <option value="Family">Famille</option>
+          </select>
+        </div>
+      </div>
+
+       <div class="cars-grid" id="carsGrid">
+         {cars.map(car => (
+           <a href={`/car/${car.slug}`} class:list={['car-card', car.slug === 'peugeot-rifter' || car.slug === 'alfa-romeo-tonale' ? 'narrow-img' : '']} data-brand={car.brand} data-price={car.price} data-category={car.category}>
+             <div class="car-image">
+               <img src={car.image} alt={car.name} />
+             </div>
+             <div class="car-info">
+               <span class="car-category">{car.category}</span>
+               <h3>{car.name}</h3>
+               <p class="car-price">{car.price}dh<span>/jour</span></p>
+             </div>
+           </a>
+         ))}
+       </div>
+
+      <div class="no-results" id="noResults">
+        <p>Aucune voiture trouvée correspondant à vos critères</p>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<script>
+  const brandFilter = document.getElementById('brandFilter') as HTMLSelectElement;
+  const priceFilter = document.getElementById('priceFilter') as HTMLSelectElement;
+  const categoryFilter = document.getElementById('categoryFilter') as HTMLSelectElement;
+  const carsGrid = document.getElementById('carsGrid');
+  const noResults = document.getElementById('noResults');
+
+  function filterCars() {
+    const brand = brandFilter?.value;
+    const priceRange = priceFilter?.value;
+    const category = categoryFilter?.value;
+    
+    const [minPrice, maxPrice] = priceRange?.split('-').map(Number) || [0, Infinity];
+    
+    const cards = carsGrid?.querySelectorAll('.car-card');
+    let visibleCount = 0;
+    
+    cards?.forEach(card => {
+      const cardBrand = card.getAttribute('data-brand');
+      const cardPrice = parseInt(card.getAttribute('data-price') || '0');
+      const cardCategory = card.getAttribute('data-category');
+      
+      const brandMatch = !brand || cardBrand === brand;
+      const priceMatch = cardPrice >= minPrice && cardPrice <= maxPrice;
+      const categoryMatch = !category || cardCategory === category;
+      
+      if (brandMatch && priceMatch && categoryMatch) {
+        (card as HTMLElement).style.display = 'block';
+        visibleCount++;
+      } else {
+        (card as HTMLElement).style.display = 'none';
+      }
+    });
+    
+    if (noResults) {
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  }
+
+  brandFilter?.addEventListener('change', filterCars);
+  priceFilter?.addEventListener('change', filterCars);
+  categoryFilter?.addEventListener('change', filterCars);
+</script>
+
+<style>
+  @font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+    color: #000000;
+    min-height: 100vh;
+  }
+
+  .cars-page {
+    padding: 120px 48px 48px;
+  }
+
+  .page-header {
+    margin-bottom: 48px;
+  }
+
+  .page-header h1 {
+    font-size: 74px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .page-header p {
+    font-size: 18px;
+    opacity: 0.7;
+  }
+
+  .filters {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #B6FF00;
+    flex-wrap: wrap;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .filter-group label {
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.7;
+  }
+
+  .filter-group select {
+    background: transparent;
+    border: 1px solid #B6FF00;
+    color: #000000;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    cursor: pointer;
+    min-width: 200px;
+  }
+
+  .filter-group select:focus {
+    outline: none;
+    background: rgba(182, 255, 0, 0.1);
+  }
+
+  .filter-group select option {
+    background: #f5f5f5;
+    color: #000000;
+  }
+
+  .cars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #B6FF00;
+  }
+
+  .car-card {
+    display: block;
+    text-decoration: none;
+    color: #000000;
+    transition: transform 0.3s ease;
+    padding: 16px;
+    background: #f5f5f5;
+  }
+
+  .car-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .car-image {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .car-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .car-card:hover .car-image img {
+    transform: scale(1.05);
+  }
+
+  .car-info {
+    padding: 0 8px;
+  }
+
+  .car-category {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #B6FF00;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .car-info h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .car-price {
+    font-size: 20px;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 48px;
+    font-size: 18px;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 1024px) {
+    .cars-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+   @media (max-width: 768px) {
+     .cars-page {
+       padding: 100px 24px 32px;
+     }
+
+     .page-header h1 {
+       font-size: 48px;
+     }
+
+     .filters {
+       flex-direction: column;
+     }
+
+     .filter-group select {
+       min-width: 100%;
+     }
+
+     .cars-grid {
+       grid-template-columns: 1fr;
+       gap: 1px;
+       background: #B6FF00;
+     }
+
+     .car-card {
+       background: #f5f5f5;
+       padding: 24px;
+     }
+
+     .car-card.narrow-img .car-image img {
+       width: 100%;
+       margin: 0 auto;
+       display: block;
+       height: 180px;
+     }
+
+     .car-image img {
+       height: 250px;
+       width: 100%;
+       object-fit: cover;
+     }
+   }
+</style>

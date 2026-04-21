@@ -1,0 +1,15 @@
+{
+  "name": "autogo-website",
+  "version": "1.0.0",
+  "description": "Car Dealer Website - Frontend Only (Astro)",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.0.0"
+  },
+  "devDependencies": {}
+}

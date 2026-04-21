@@ -1,0 +1,572 @@
+---
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import cars from '../../data/cars.json';
+
+export function getStaticPaths() {
+  return cars.map(car => ({
+    params: { slug: car.slug },
+    props: { car }
+  }));
+}
+
+const { car } = Astro.props;
+const pageTitle = `${car.name} | AutoGo`;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Navbar />
+    
+    <main class="car-detail-page">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-image">
+          <img src={car.slug === 'dacia-logan' ? 'https://cdn.group.renault.com/dac/master/dacia-vn/vehicules/logan/logan-li1-ph2/herozone-banners/dacia-logan-li1-ph2-herozone-001-desktop.jpg.ximg.largex2.webp/27ae8c6dae.webp' : car.slug === 'peugeot-rifter' ? 'https://www.peugeot.ma/content/dam/peugeot/morocco/RIFTER-2880X1620.jpg?imwidth=1920' : car.image} alt={car.name} />
+          {car.slug !== 'dacia-logan' && car.slug !== 'peugeot-rifter' && <img src="https://www.peugeot.com/content/dam/peugeot/master/b2c/our-range/showroom/208/2023-10-new-208/mobile/PEUGEOT_E_208_2307STYP_090.jpg?imwidth=768" alt="New peugeot 208 with PEUGEOT i-COCKPIT®" class="detail-image" />}
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <span class="vehicle-badge">DISPONIBLE À LA LOCATION</span>
+          <h1>{car.name}</h1>
+          <p class="car-price-tag">{car.price}dh<span>/jour</span></p>
+           <p class="hero-tagline" class:list={car.slug === 'peugeot-rifter' ? ['white-tagline'] : []}>Conduisez le futur. Arrivez en silence.</p>
+          <a href="#booking" class="cta-button">Voir les disponibilités →</a>
+        </div>
+        <div class="scroll-indicator" class:list={car.slug === 'peugeot-rifter' ? ['white-scroll'] : []}>
+          <span>Faire défiler pour explorer</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5L12 19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Vehicle Highlights -->
+      <section class="highlights-section">
+        <div class="highlights-grid">
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+              </svg>
+            </div>
+            <h3>PERFORMANCE ÉLECTRIQUE</h3>
+            <p>Moteur silencieux de {car.year} avec accélération instantanée et zero émissions.</p>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="6" width="18" height="12" rx="2"/>
+                <path d="M7 12h10"/>
+              </svg>
+            </div>
+            <h3>CABINE PREMIUM</h3>
+            <p>Intérieur spacieux avec matériaux de haute qualité et confort optimal.</p>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3>TECHNOLOGIE AVANCÉE</h3>
+            <p>Système multimedia dernier cri et aides à la conduite intelligentes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Specifications -->
+      <section class="specs-section">
+        <div class="specs-container">
+          <div class="specs-image">
+            <img src={car.image} alt={`${car.name} Interior`} />
+          </div>
+          <div class="specs-grid">
+            <h2>SPÉCIFICATIONS TECHNIQUES</h2>
+            <div class="spec-item">
+              <span class="spec-label">Marque</span>
+              <span class="spec-value">{car.brand}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Année</span>
+              <span class="spec-value">{car.year}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Kilométrage</span>
+              <span class="spec-value">{car.mileage}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Transmission</span>
+              <span class="spec-value">{car.transmission}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Carburant</span>
+              <span class="spec-value">{car.fuelType}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Catégorie</span>
+              <span class="spec-value">{car.category}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Booking Form -->
+      <section id="booking" class="booking-section">
+        <h2>RÉSERVER {car.name}</h2>
+        <form class="booking-form" action="/booking" method="GET">
+          <input type="hidden" name="car" value={car.slug} />
+          
+          <div class="form-group">
+            <label for="fullName">Nom complet</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Votre nom complet" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="pickupLocation">Lieu de retrait</label>
+            <input type="text" id="pickupLocation" name="pickupLocation" placeholder="Adresse ou lieu" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="dropoffLocation">Lieu de retour</label>
+            <input type="text" id="dropoffLocation" name="dropoffLocation" placeholder="Adresse ou lieu" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+212 6XX XXX XXX" required />
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="startDate">Date de début</label>
+              <input type="date" id="startDate" name="startDate" required />
+            </div>
+            
+            <div class="form-group">
+              <label for="endDate">Date de fin</label>
+              <input type="date" id="endDate" name="endDate" required />
+            </div>
+          </div>
+          
+           <button type="submit" class="submit-btn">Réserver maintenant</button>
+           </form>
+         </section>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 700;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f5f5f5;
+    color: #000000;
+    min-height: 100vh;
+  }
+
+  .car-detail-page {
+    padding-top: 80px;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: flex-end;
+    padding: 48px;
+  }
+
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-image .detail-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+  }
+
+  .vehicle-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(182, 255, 0, 0.1);
+    border: 1px solid #B6FF00;
+    color: #B6FF00;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-content h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .car-price-tag {
+    font-size: 32px;
+    font-weight: 700;
+    color: #B6FF00;
+    margin-bottom: 16px;
+  }
+
+  .car-price-tag span {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.8;
+  }
+
+  .hero-tagline {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 16px 32px;
+    background: #B6FF00;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background: #f5f5f5;
+    transform: scale(1.02);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 48px;
+    right: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Highlights Section */
+  .highlights-section {
+    background: #f5f5f5;
+    padding: 80px 48px;
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #B6FF00;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .highlight-card {
+    padding: 32px;
+    background: #f5f5f5;
+    transition: all 0.3s ease;
+  }
+
+  .highlight-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .highlight-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 24px;
+    color: #B6FF00;
+  }
+
+  .highlight-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  .highlight-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  /* Specs Section */
+  .specs-section {
+    background: #f5f5f5;
+    color: #000000;
+    padding: 80px 48px;
+  }
+
+  .specs-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+.specs-image {
+    background: #f5f5f5;
+    padding: 16px;
+  }
+
+  .specs-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: contain;
+    background: #f5f5f5;
+  }
+
+  .specs-image {
+    border: none;
+  }
+
+  .specs-grid h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+  }
+
+  .spec-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(182, 255, 0, 0.3);
+  }
+
+  .spec-label {
+    font-size: 14px;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .spec-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #B6FF00;
+  }
+
+  /* Booking Section */
+  .booking-section {
+    padding: 80px 48px;
+    text-align: center;
+    background: #f5f5f5;
+  }
+
+  .booking-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+  }
+
+  .booking-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+  }
+
+  .form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 16px;
+    background: #f5f5f5;
+    border: 1px solid rgba(182, 255, 0, 0.3);
+    color: #000000;
+    font-size: 16px;
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: #B6FF00;
+    background: rgba(182, 255, 0, 0.05);
+  }
+
+  .form-group select {
+    cursor: pointer;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .submit-btn {
+    padding: 20px 48px;
+    background: #B6FF00;
+    color: #000000;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+  }
+
+   .submit-btn:hover {
+     background: #f5f5f5;
+   }
+
+   .white-tagline {
+     color: #ffffff !important;
+   }
+
+   .white-scroll {
+     color: #ffffff !important;
+   }
+
+   .booking-title-box {
+     display: inline-block;
+     padding: 16px 32px;
+     border: 2px solid #B6FF00;
+     border-radius: 4px;
+     margin-bottom: 40px;
+   }
+
+   .booking-title-box h2 {
+     font-size: 24px;
+     font-weight: 700;
+     letter-spacing: 2px;
+     color: #000000;
+     margin: 0;
+   }
+
+   .form-box {
+     display: inline-block;
+     padding: 40px;
+     border: 2px solid #B6FF00;
+     border-radius: 8px;
+     background: #f5f5f5;
+     max-width: 600px;
+     text-align: left;
+   }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 24px;
+      height: 80vh;
+    }
+
+    .hero-content h1 {
+      font-size: 32px;
+    }
+
+    .scroll-indicator {
+      display: none;
+    }
+
+    .highlights-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .booking-section {
+      padding: 48px 16px;
+    }
+
+    .booking-section h2 {
+      font-size: 24px;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .submit-btn {
+      width: 100%;
+    }
+
+    .specs-container {
+      grid-template-columns: 1fr;
+    }
+
+    .specs-image img {
+      height: 200px;
+    }
+  }
+</style>
