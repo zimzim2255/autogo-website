@@ -4,7 +4,7 @@
   "description": "Car Dealer Website - Frontend Only (Astro)",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node node_modules/astro/cli.js build",
     "preview": "astro preview",
     "astro": "astro"
   },
