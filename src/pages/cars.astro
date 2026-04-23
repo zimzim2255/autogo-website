@@ -290,45 +290,54 @@ const priceRanges = [
     }
   }
 
-   @media (max-width: 768px) {
-     .cars-page {
-       padding: 100px 24px 32px;
-     }
+@media (max-width: 768px) {
+      .cars-page {
+        padding: 100px 24px 32px;
+      }
 
-     .page-header h1 {
-       font-size: 48px;
-     }
+      .page-header h1 {
+        font-size: 48px;
+      }
 
-     .filters {
-       flex-direction: column;
-     }
+      .filters {
+        flex-direction: column;
+      }
 
-     .filter-group select {
-       min-width: 100%;
-     }
+      .filter-group select {
+        min-width: 100%;
+      }
 
-     .cars-grid {
-       grid-template-columns: 1fr;
-       gap: 1px;
-       background: #B6FF00;
-     }
+      .cars-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+        background: transparent;
+      }
 
-     .car-card {
-       background: #f5f5f5;
-       padding: 24px;
-     }
+      .car-card {
+        background: #f5f5f5;
+        padding: 24px;
+        border-bottom: 0.3px solid #B6FF00;
+      }
 
-     .car-card.narrow-img .car-image img {
-       width: 100%;
-       margin: 0 auto;
-       display: block;
-       height: 180px;
-     }
+      .car-card.narrow-img .car-image img {
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+        height: 180px;
+      }
 
-     .car-image img {
-       height: 250px;
-       width: 100%;
-       object-fit: cover;
-     }
-   }
+      .car-image {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+
+      .car-image img {
+        height: auto;
+        width: 100%;
+        max-height: 200px;
+        object-fit: contain;
+        object-position: center bottom;
+      }
+    }
 </style>

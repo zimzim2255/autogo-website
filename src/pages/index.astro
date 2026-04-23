@@ -129,16 +129,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="link-list-section">
   <div class="link-list-container">
     <a href="/contact" class="link-item">
-      <span>Trouver un revendeur</span>
-      <span class="link-arrow">→</span>
+      <span>Find a retailer</span>
+      <svg class="link-arrow" viewBox="0 0 14 24" height="100%" role="presentation"><path d="m13.75 12-12-12L.693 1.058 11.635 12 .693 22.943 1.75 24z" fill="currentColor"></path></svg>
     </a>
     <a href="/services" class="link-item">
-      <span>Flotte et entreprises</span>
-      <span class="link-arrow">→</span>
+      <span>Fleet & business</span>
+      <svg class="link-arrow" viewBox="0 0 14 24" height="100%" role="presentation"><path d="m13.75 12-12-12L.693 1.058 11.635 12 .693 22.943 1.75 24z" fill="currentColor"></path></svg>
     </a>
     <a href="/faq" class="link-item">
-      <span>S'inscrire à la newsletter</span>
-      <span class="link-arrow">→</span>
+      <span>Newsletter sign up</span>
+      <svg class="link-arrow" viewBox="0 0 14 24" height="100%" role="presentation"><path d="m13.75 12-12-12L.693 1.058 11.635 12 .693 22.943 1.75 24z" fill="currentColor"></path></svg>
     </a>
   </div>
 </section>
@@ -1044,9 +1044,78 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 
-  .service-nav {
-    margin-top: 60px;
-  }
+   .link-list-section {
+     padding: 64px 24px;
+     display: flex;
+     justify-content: center;
+   }
+
+   .link-list-container {
+     display: flex;
+     flex-direction: column;
+     gap: 0;
+     max-width: 1200px;
+     width: 100%;
+   }
+
+   .link-item {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     text-decoration: none;
+     color: #000000;
+     font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+     font-size: 6rem;
+     font-weight: 500;
+     line-height: 1.2;
+     padding: 12px 0;
+     cursor: pointer;
+     transition: color 0.2s ease, transform 0.2s ease;
+   }
+
+   .link-item:hover {
+     color: #333333;
+   }
+
+   .link-item:hover .link-arrow {
+     transform: translateX(8px);
+   }
+
+   .link-arrow {
+     width: 48px;
+     height: auto;
+     color: #B6FF00;
+     flex-shrink: 0;
+     transition: transform 0.2s ease;
+   }
+
+   @media (max-width: 768px) {
+     .link-list-section {
+       padding: 48px 16px;
+     }
+
+     .link-item {
+       font-size: 4rem;
+     }
+
+     .link-arrow {
+       width: 40px;
+     }
+   }
+
+   @media (max-width: 480px) {
+     .link-item {
+       font-size: 2.5rem;
+     }
+
+     .link-arrow {
+       width: 28px;
+     }
+   }
+
+   .service-nav {
+     margin-top: 60px;
+   }
 
   .service-list {
     display: flex;
