@@ -12,6 +12,35 @@ export function getStaticPaths() {
 
 const { car } = Astro.props;
 const pageTitle = `${car.name} | AutoGo`;
+
+function getSpecLabel(key: string): string {
+  const labels: Record<string, string> = {
+    motor: 'Moteur',
+    engine: 'Moteur',
+    battery: 'Batterie',
+    autonomy: 'Autonomie',
+    charging: 'Recharge',
+    acceleration: 'Accélération',
+    topSpeed: 'Vitesse max',
+    power: 'Puissance',
+    torque: 'Couple',
+    fuelConsumption: 'Consommation',
+    trunkCapacity: 'Coffre',
+    seatingCapacity: 'Places'
+  };
+  return labels[key] || key;
+}
+
+function getSpecOrder(car: any): string[] {
+  if (car.fuelType === 'Électrique') {
+    return ['motor', 'battery', 'autonomy', 'charging', 'acceleration', 'topSpeed'];
+  }
+  if (car.fuelType === 'Hybride') {
+    return ['engine', 'power', 'torque', 'acceleration', 'topSpeed', 'battery'];
+  }
+  // Essence/Diesel
+  return ['engine', 'power', 'torque', 'fuelConsumption', 'topSpeed', 'trunkCapacity', 'seatingCapacity'];
+}
 ---
 
 <!doctype html>
@@ -90,30 +119,16 @@ const pageTitle = `${car.name} | AutoGo`;
           </div>
           <div class="specs-grid">
             <h2>SPÉCIFICATIONS TECHNIQUES</h2>
-            <div class="spec-item">
-              <span class="spec-label">Marque</span>
-              <span class="spec-value">{car.brand}</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Année</span>
-              <span class="spec-value">{car.year}</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Kilométrage</span>
-              <span class="spec-value">{car.mileage}</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Transmission</span>
-              <span class="spec-value">{car.transmission}</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Carburant</span>
-              <span class="spec-value">{car.fuelType}</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Catégorie</span>
-              <span class="spec-value">{car.category}</span>
-            </div>
+            {car.specs && getSpecOrder(car).map(key => {
+              const value = car.specs[key];
+              if (!value) return null;
+              return (
+                <div class="spec-item">
+                  <span class="spec-label">{getSpecLabel(key)}</span>
+                  <span class="spec-value">{value}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -367,17 +382,17 @@ const pageTitle = `${car.name} | AutoGo`;
     align-items: center;
   }
 
-.specs-image {
-    background: #f5f5f5;
-    padding: 16px;
-  }
+ .specs-image {
+     background: #f5f5f5;
+     padding: 8px;
+   }
 
-  .specs-image img {
-    width: 100%;
-    height: 500px;
-    object-fit: contain;
-    background: #f5f5f5;
-  }
+    .specs-image img {
+      width: 100%;
+      height: 700px;
+      object-fit: contain;
+      background: #f5f5f5;
+    }
 
   .specs-image {
     border: none;
@@ -565,8 +580,8 @@ const pageTitle = `${car.name} | AutoGo`;
       grid-template-columns: 1fr;
     }
 
-    .specs-image img {
-      height: 300px;
-    }
+      .specs-image img {
+        height: 500px;
+      }
   }
 </style>
