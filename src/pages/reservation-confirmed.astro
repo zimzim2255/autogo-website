@@ -1,0 +1,398 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import ReservationReceipt from '../components/ReservationReceipt.astro';
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Réservation Confirmée | AutoGo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <Navbar />
+    
+    <main class="confirmation-page">
+      <div class="confirmation-container">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        
+        <h1>Réservation Confirmée!</h1>
+        <p class="subtitle">Votre demande de réservation a été envoyée avec succès. Vous recevrez une confirmation par email.</p>
+        
+        <div class="confirmation-details">
+          <div class="detail-row">
+            <span class="label">Numéro de confirmation:</span>
+            <span class="value" id="confirmationId">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Véhicule:</span>
+            <span class="value" id="vehicleName">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Nom:</span>
+            <span class="value" id="clientName">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Téléphone:</span>
+            <span class="value" id="clientPhone">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Dates:</span>
+            <span class="value" id="dateRange">-</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button id="downloadBtn" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Télécharger le reçu en PDF
+          </button>
+          <a href="/" class="btn btn-secondary">Retour à l'accueil</a>
+        </div>
+
+        <div class="info-box">
+          <h3>Prochaines étapes</h3>
+          <ul>
+            <li>Vous recevrez une confirmation par email avec tous les détails</li>
+            <li>Veuillez confirmer votre réservation par téléphone dans les 48 heures</li>
+            <li>Une pièce d'identité et un permis de conduire valide seront requis au retrait</li>
+            <li>Pour toute question, contactez <strong>Khaled</strong> au numéro fourni dans le email</li>
+          </ul>
+        </div>
+      </div>
+
+      <ReservationReceipt />
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f5f5f5;
+    color: #000000;
+    min-height: 100vh;
+  }
+
+  .confirmation-page {
+    padding: 120px 48px 48px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .confirmation-container {
+    background: white;
+    border-radius: 8px;
+    padding: 48px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    background: #B6FF00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+
+  .success-icon svg {
+    width: 44px;
+    height: 44px;
+    color: #000;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #000;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .confirmation-details {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+    text-align: left;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .detail-row:last-child {
+    border-bottom: none;
+  }
+
+  .detail-row .label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .detail-row .value {
+    color: #666;
+    text-align: right;
+  }
+
+  .detail-row .value.total {
+    font-weight: 700;
+    color: #B6FF00;
+    font-size: 18px;
+  }
+
+  .action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .btn-primary {
+    background: #B6FF00;
+    color: #000;
+  }
+
+  .btn-primary:hover {
+    background: #a8e600;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(182, 255, 0, 0.3);
+  }
+
+  .btn-secondary {
+    background: #f0f0f0;
+    color: #000;
+    border: 1px solid #ddd;
+  }
+
+  .btn-secondary:hover {
+    background: #e8e8e8;
+  }
+
+  .info-box {
+    background: #f0f7ff;
+    border-left: 4px solid #B6FF00;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: left;
+  }
+
+  .info-box h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #000;
+  }
+
+  .info-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .info-box li {
+    padding: 8px 0;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .info-box li:before {
+    content: "✓ ";
+    color: #B6FF00;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .confirmation-page {
+      padding: 100px 24px 24px;
+    }
+
+    .confirmation-container {
+      padding: 32px 24px;
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    .action-buttons {
+      grid-template-columns: 1fr;
+    }
+
+    .confirmation-details {
+      padding: 16px;
+    }
+
+    .detail-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .detail-row .value {
+      text-align: left;
+    }
+  }
+</style>
+
+<script>
+  // @ts-ignore
+  // Parse URL parameters
+  function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      fullName: params.get('fullName') || '',
+      email: params.get('email') || '',
+      phone: params.get('phone') || '',
+      vehicle: params.get('vehicle') || params.get('car') || '',
+      pickupLocation: params.get('pickupLocation') || params.get('location') || '',
+      dropoffLocation: params.get('dropoffLocation') || '',
+      startDate: params.get('startDate') || params.get('pickup') || '',
+      endDate: params.get('endDate') || params.get('dropoff') || '',
+      source: params.get('source') || 'unknown'
+    };
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '-';
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  function calculateDays(startDate, endDate) {
+    if (!startDate || !endDate) return 0;
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const diffTime = Math.abs(end.getTime() - start.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays || 1;
+  }
+
+  function getCarName(slug) {
+    const carNames = {
+      'peugeot-208': 'Peugeot 208',
+      'dacia-logan': 'Dacia Logan',
+      'peugeot-rifter': 'Peugeot Rifter',
+      'range-rover-sport': 'Range Rover Sport',
+      'ford-tourneo': 'Ford Tourneo',
+      'peugeot-partner': 'Peugeot Partner',
+      'alfa-romeo-tonale': 'Alfa Romeo Tonale'
+    };
+    return carNames[slug] || slug;
+  }
+
+  window.addEventListener('load', function() {
+    const params = getQueryParams();
+
+    if (!params.fullName || !params.vehicle) {
+      const infoBox = document.querySelector('.info-box');
+      if (infoBox) {
+        infoBox.innerHTML = `
+          <h3>Erreur</h3>
+          <p>Les informations de réservation sont manquantes. Veuillez <a href="/">de nouveau soumettre votre réservation</a>.</p>
+        `;
+      }
+      return;
+    }
+
+    const confirmationId = 'RES-' + Date.now().toString().slice(-8);
+    const carName = getCarName(params.vehicle);
+    const days = calculateDays(params.startDate, params.endDate);
+    const dateRange = formatDate(params.startDate) + ' - ' + formatDate(params.endDate);
+
+    // Update display
+    const confirmationIdEl = document.getElementById('confirmationId');
+    const vehicleNameEl = document.getElementById('vehicleName');
+    const clientNameEl = document.getElementById('clientName');
+    const clientPhoneEl = document.getElementById('clientPhone');
+    const dateRangeEl = document.getElementById('dateRange');
+    const totalAmountEl = document.getElementById('totalAmount');
+
+    if (confirmationIdEl) confirmationIdEl.textContent = confirmationId;
+    if (vehicleNameEl) vehicleNameEl.textContent = carName;
+    if (clientNameEl) clientNameEl.textContent = params.fullName;
+    if (clientPhoneEl) clientPhoneEl.textContent = params.phone;
+    if (dateRangeEl) dateRangeEl.textContent = dateRange;
+    if (totalAmountEl) totalAmountEl.textContent = '-';
+
+    // Populate receipt
+    if (typeof window.populateReceipt === 'function') {
+      window.populateReceipt({
+        vehicle: carName,
+        fullName: params.fullName,
+        phone: params.phone,
+        email: params.email,
+        pickupLocation: params.pickupLocation,
+        dropoffLocation: params.dropoffLocation,
+        startDate: formatDate(params.startDate),
+        endDate: formatDate(params.endDate),
+        days: days,
+        totalPrice: 0
+      });
+    }
+
+    // Download button
+    const downloadBtn = document.getElementById('downloadBtn');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function() {
+        if (typeof window.downloadReceiptPDF === 'function') {
+          window.downloadReceiptPDF();
+        }
+      });
+    }
+  });
+</script>

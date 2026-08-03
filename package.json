@@ -1,0 +1,19 @@
+{
+  "name": "autogo-website",
+  "version": "1.0.0",
+  "description": "Car Dealer Website - Frontend Only (Astro)",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "dependencies": {
+    "astro": "^4.0.0",
+    "html2pdf.js": "^0.14.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
+}

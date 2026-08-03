@@ -1,0 +1,100 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coming Soon | AutoGo</title>
+  </head>
+  <body>
+    <Navbar />
+    
+    <main class="coming-soon-page">
+      <div class="content">
+        <h1>Coming Soon</h1>
+        <p>Ce véhicule arrive bientôt. Restez informé!</p>
+        <a href="/cars" class="back-btn">Voir tous les véhicules</a>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f5f5f5;
+    color: #000000;
+    min-height: 100vh;
+  }
+
+  .coming-soon-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 48px 48px;
+    text-align: center;
+  }
+
+  .content h1 {
+    font-size: 96px;
+    font-weight: 700;
+    color: #B6FF00;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .content p {
+    font-size: 24px;
+    margin-bottom: 48px;
+    opacity: 0.8;
+  }
+
+  .back-btn {
+    display: inline-block;
+    padding: 16px 48px;
+    background-color: #B6FF00;
+    color: #000000;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+
+  .back-btn:hover {
+    background-color: #000000;
+    color: #B6FF00;
+  }
+
+  @media (max-width: 768px) {
+    .coming-soon-page {
+      padding: 100px 24px 32px;
+    }
+
+    .content h1 {
+      font-size: 64px;
+    }
+
+    .content p {
+      font-size: 18px;
+    }
+  }
+</style>

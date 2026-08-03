@@ -1,0 +1,329 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const categories = [
+  {
+    name: "SUV",
+    prices: [
+      { days: "1-3", price: "450dh" },
+      { days: "4-7", price: "400dh" },
+      { days: "8-14", price: "350dh" },
+      { days: "15+", price: "300dh" }
+    ]
+  },
+  {
+    name: "Sedan",
+    prices: [
+      { days: "1-3", price: "350dh" },
+      { days: "4-7", price: "300dh" },
+      { days: "8-14", price: "250dh" },
+      { days: "15+", price: "200dh" }
+    ]
+  },
+  {
+    name: "Family",
+    prices: [
+      { days: "1-3", price: "500dh" },
+      { days: "4-7", price: "450dh" },
+      { days: "8-14", price: "400dh" },
+      { days: "15+", price: "350dh" }
+    ]
+  },
+  {
+    name: "Compact",
+    prices: [
+      { days: "1-3", price: "250dh" },
+      { days: "4-7", price: "200dh" },
+      { days: "8-14", price: "175dh" },
+      { days: "15+", price: "150dh" }
+    ]
+  }
+];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarifs de Location | AutoGo</title>
+  </head>
+  <body>
+    <Navbar />
+    
+    <main class="pricing-page">
+      <div class="page-header">
+        <h1>Tarifs de Location</h1>
+        <p>Choisissez votre catégorie et durée de location</p>
+      </div>
+
+      <div class="pricing-table">
+        <div class="table-header">
+          <div class="header-category">Catégorie</div>
+          <div class="header-days">1-3 Jours</div>
+          <div class="header-days">4-7 Jours</div>
+          <div class="header-days">8-14 Jours</div>
+          <div class="header-days">15+ Jours</div>
+        </div>
+
+        {categories.map(category => (
+          <div class="table-row">
+            <div class="row-category">
+              <span class="category-name">{category.name}</span>
+            </div>
+            {category.prices.map(p => (
+              <div class="row-price" data-days={p.days}>
+                <span class="price-value">{p.price}</span>
+                <span class="price-unit">/jour</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div class="pricing-note">
+        <p>* Les prix incluent l'assurance de base. Options d'assurance supplémentaires disponibles au paiement.</p>
+        <p>* Kilométrage illimité inclus dans toutes les locations.</p>
+        <p>* Annulation gratuite jusqu'à 24 heures avant le retrait.</p>
+      </div>
+
+      <div class="cta-section">
+        <a href="/cars" class="cta-btn">Voir les Voitures</a>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 700;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f5f5f5;
+    color: #000000;
+    min-height: 100vh;
+  }
+
+  .pricing-page {
+    padding: 120px 48px 48px;
+  }
+
+  .page-header {
+    margin-bottom: 64px;
+  }
+
+  .page-header h1 {
+    font-size: 74px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .page-header p {
+    font-size: 18px;
+    opacity: 0.7;
+  }
+
+  .pricing-table {
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #B6FF00;
+  }
+
+  .table-header {
+    display: grid;
+    grid-template-columns: 2fr repeat(4, 1fr);
+    background: rgba(182, 255, 0, 0.1);
+    border-bottom: 1px solid #B6FF00;
+  }
+
+  .header-category,
+  .header-days {
+    padding: 32px 24px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .header-category {
+    text-align: left;
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: 2fr repeat(4, 1fr);
+    border-bottom: 1px solid rgba(182, 255, 0, 0.3);
+  }
+
+  .table-row:last-child {
+    border-bottom: none;
+  }
+
+  .row-category {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px 24px;
+    min-height: 120px;
+  }
+
+  .category-name {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .row-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 32px 24px;
+    border-left: 1px solid rgba(182, 255, 0, 0.3);
+    min-height: 120px;
+  }
+
+  .price-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: #B6FF00;
+  }
+
+  .price-unit {
+    font-size: 14px;
+    opacity: 0.6;
+  }
+
+  .pricing-note {
+    max-width: 1200px;
+    margin: 48px auto;
+    padding: 24px;
+    background: rgba(182, 255, 0, 0.05);
+    border: 1px solid rgba(182, 255, 0, 0.3);
+  }
+
+  .pricing-note p {
+    font-size: 14px;
+    opacity: 0.6;
+    margin-bottom: 8px;
+  }
+
+  .pricing-note p:last-child {
+    margin-bottom: 0;
+  }
+
+  .cta-section {
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 16px 48px;
+    text-decoration: none;
+    color: #000000;
+    background: #B6FF00;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+  }
+
+  .cta-btn:hover {
+    background: #f5f5f5;
+  }
+
+  @media (max-width: 1024px) {
+    .table-header,
+    .table-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .header-days,
+    .row-price {
+      display: none;
+    }
+
+    .header-days:first-child,
+    .row-price:first-child {
+      display: flex;
+    }
+
+    .table-header {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .pricing-page {
+      padding: 100px 16px 32px;
+    }
+
+    .page-header h1 {
+      font-size: 36px;
+    }
+
+    .pricing-table {
+      border: none;
+    }
+
+    .table-header {
+      display: none;
+    }
+
+    .table-row {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #B6FF00;
+      margin-bottom: 16px;
+      background: rgba(182, 255, 0, 0.05);
+    }
+
+    .row-category {
+      padding: 16px;
+      border-bottom: 1px solid rgba(182, 255, 0, 0.3);
+      min-height: auto;
+    }
+
+    .category-name {
+      font-size: 24px;
+    }
+
+    .row-price {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-left: none;
+      border-bottom: 1px solid rgba(182, 255, 0, 0.3);
+      min-height: auto;
+    }
+
+    .row-price:last-child {
+      border-bottom: none;
+    }
+
+    .row-price::before {
+      content: attr(data-days) " Days";
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0.6;
+    }
+
+    .price-value {
+      font-size: 20px;
+    }
+
+    .price-unit {
+      font-size: 12px;
+    }
+  }
+</style>

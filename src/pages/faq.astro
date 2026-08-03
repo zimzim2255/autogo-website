@@ -1,0 +1,233 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    question: "Que dois-je faire pour louer un véhicule ?",
+    answer: "Vous devez disposer d'un permis de conduire valide, d'un passeport ou carte d'identité nationale, et d'une carte de crédit pour le dépôt de garantie. Tous les conducteurs doivent avoir au moins 21 ans."
+  },
+  {
+    question: "Puis-je ajouter un conducteur supplémentaire ?",
+    answer: "Oui, des conducteurs supplémentaires peuvent être ajoutés moyennant des frais modestes. Chaque conducteur doit remplir les mêmes critères d'éligibilité et fournir ses documents."
+  },
+  {
+    question: "Qu'est-ce qui est inclus dans le prix de la location ?",
+    answer: "L'assurance tous risques complète, le kilométrage illimité, la charge à domicile, l'assistance roadside 24h/24, ainsi que tous les taxes et frais sont inclus dans votre prix de location."
+  },
+  {
+    question: "Que se passe-t-il si je rends le véhicule en retard ?",
+    answer: "Les retards sont facturés au tarif journalier. Les retours avec plus de 2 heures de retard peuvent entraîner des frais d'une journée de location supplémentaire. Veuillez nous contacter si vous prévoyez d'être en retard."
+  },
+  {
+    question: "Puis-je annuler ma réservation ?",
+    answer: "Oui, vous pouvez annuler sans frais jusqu'à 24 heures avant votre prise en charge prévue. Dans les 24 heures, des frais d'une journée de location s'appliquent."
+  }
+];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ | AutoGo</title>
+  </head>
+  <body>
+    <Navbar />
+    
+    <main class="faq-page">
+      <div class="faq-grid">
+        <div class="faq-header">
+          <h1>RÉPONSES À VOS QUESTIONS</h1>
+          <p>Tout ce que vous devez savoir pour passer à l'étape suivante</p>
+        </div>
+
+        <div class="faq-list">
+          {faqs.map((faq, index) => (
+            <details class="faq-item">
+              <summary>
+                <span class="faq-question">{faq.question}</span>
+                <span class="faq-icon">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p>{faq.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <div class="contact-section">
+        <h2>Vous avez encore des questions ?</h2>
+        <p>Contactez notre équipe de support pour plus d'informations</p>
+        <a href="/contact" class="contact-btn">Nous contacter</a>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f5f5f5;
+    color: #000000;
+    min-height: 100vh;
+  }
+
+  .faq-page {
+    padding: 120px 48px 48px;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 60vh;
+  }
+
+  .faq-header {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .faq-header h1 {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .faq-header p {
+    font-size: 20px;
+    opacity: 0.7;
+  }
+
+  .faq-list {
+    border-left: 1px solid #B6FF00;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #B6FF00;
+  }
+
+  .faq-item:first-child {
+    border-top: 1px solid #B6FF00;
+  }
+
+  .faq-item summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .faq-icon {
+    font-size: 24px;
+    font-weight: 700;
+    color: #B6FF00;
+    transition: transform 0.3s ease;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 32px 32px;
+  }
+
+  .faq-answer p {
+    font-size: 16px;
+    line-height: 1.7;
+    opacity: 0.8;
+  }
+
+  .contact-section {
+    text-align: center;
+    padding: 64px;
+    margin-top: 48px;
+    border: 1px solid #B6FF00;
+  }
+
+  .contact-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .contact-section p {
+    font-size: 16px;
+    opacity: 0.7;
+    margin-bottom: 32px;
+  }
+
+  .contact-btn {
+    display: inline-block;
+    padding: 16px 48px;
+    background: #B6FF00;
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+  }
+
+  .contact-btn:hover {
+    background: #f5f5f5;
+  }
+
+  @media (max-width: 1024px) {
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .faq-list {
+      border-left: none;
+      border-top: 1px solid #B6FF00;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .faq-page {
+      padding: 100px 24px 32px;
+    }
+
+    .faq-header h1 {
+      font-size: 36px;
+    }
+
+    .faq-item summary {
+      padding: 20px 24px;
+    }
+
+    .faq-question {
+      font-size: 16px;
+    }
+
+    .faq-answer {
+      padding: 0 24px 24px;
+    }
+
+    .contact-section {
+      padding: 48px 24px;
+    }
+  }
+</style>

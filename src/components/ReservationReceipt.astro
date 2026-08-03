@@ -1,0 +1,163 @@
+---
+// Component to generate PDF receipt for reservations
+---
+
+<div id="receipt-container" style="display: none;">
+  <div id="receipt-content" style="padding: 30px; background: white; font-family: Arial, sans-serif; width: 100%; max-width: 900px; margin: 0 auto;">
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: 25px; border-bottom: 2px solid #333; padding-bottom: 15px;">
+      <h1 style="margin: 0 0 3px 0; font-size: 32px; color: #000; letter-spacing: 1px;">AUTOGO</h1>
+      <p style="margin: 5px 0 0; color: #333; font-size: 13px;">Location de Véhicules - Casablanca & Rabat, Maroc</p>
+    </div>
+
+    <!-- Confirmation Title & Info -->
+    <div style="text-align: center; margin-bottom: 25px;">
+      <h2 style="margin: 0 0 10px 0; font-size: 22px; color: #000; letter-spacing: 0.5px;">CONFIRMATION DE RÉSERVATION</h2>
+      <p style="margin: 3px 0; color: #333; font-size: 13px;">Confirmation #: <span id="receipt-confirmation-id" style="font-weight: bold;">-</span></p>
+      <p style="margin: 3px 0 0; color: #333; font-size: 13px;">Date: <span id="receipt-date" style="font-weight: bold;">-</span></p>
+    </div>
+
+    <!-- Reservation Details Table -->
+    <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; font-size: 13px;">
+      <tr style="background: #f5f5f5;">
+        <td style="padding: 8px; font-weight: bold; border: 1px solid #ddd; color: #000;">Détail de la Réservation</td>
+        <td style="padding: 8px; border: 1px solid #ddd;"></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #000;">Véhicule:</td>
+        <td style="padding: 8px; border: 1px solid #ddd; color: #333;"><span id="receipt-vehicle">-</span></td>
+      </tr>
+      <tr style="background: #f9f9f9;">
+        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #000;">Nom complet:</td>
+        <td style="padding: 8px; border: 1px solid #ddd; color: #333;"><span id="receipt-name">-</span></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #000;">Téléphone:</td>
+        <td style="padding: 8px; border: 1px solid #ddd; color: #333;"><span id="receipt-phone">-</span></td>
+      </tr>
+      <tr style="background: #f9f9f9;">
+        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #000;">Email:</td>
+        <td style="padding: 8px; border: 1px solid #ddd; color: #333;"><span id="receipt-email">-</span></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #000;">Lieu de retrait:</td>
+        <td style="padding: 8px; border: 1px solid #ddd; color: #333;"><span id="receipt-pickup">-</span></td>
+      </tr>
+      <tr style="background: #f9f9f9;">
+        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #000;">Lieu de retour:</td>
+        <td style="padding: 8px; border: 1px solid #ddd; color: #333;"><span id="receipt-dropoff">-</span></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #000;">Date de début:</td>
+        <td style="padding: 8px; border: 1px solid #ddd; color: #333;"><span id="receipt-start-date">-</span></td>
+      </tr>
+      <tr style="background: #f9f9f9;">
+        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #000;">Date de fin:</td>
+        <td style="padding: 8px; border: 1px solid #ddd; color: #333;"><span id="receipt-end-date">-</span></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: #000;">Nombre de jours:</td>
+        <td style="padding: 8px; border: 1px solid #ddd; color: #333;"><span id="receipt-days">-</span></td>
+      </tr>
+    </table>
+
+    <!-- Total Amount Section - Professional Simple -->
+    <div style="padding: 15px 0; text-align: center; border-top: 1px solid #333; border-bottom: 1px solid #333; margin-bottom: 15px;">
+      <p style="margin: 0; font-size: 14px; color: #000;">Montant total estimé:</p>
+      <p style="margin: 8px 0 0; font-size: 20px; color: #000; font-weight: bold;"><span id="receipt-total">-</span> DH</p>
+    </div>
+
+    <!-- Important Note -->
+    <div style="background: #f5f5f5; padding: 10px; border-left: 2px solid #333; margin-bottom: 15px;">
+      <p style="margin: 0; font-size: 12px; color: #333;">
+        <strong>Important:</strong> Veuillez conserver cette confirmation. Elle vous sera demandée lors du retrait du véhicule.
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align: center; color: #666; font-size: 11px; padding-top: 10px;">
+      <p style="margin: 0;">Montant à payer: <span id="receipt-footer-total" style="color: #000; font-weight: bold;">-</span> DH</p>
+    </div>
+  </div>
+</div>
+
+  <script>
+  // @ts-ignore
+  // TypeScript interface for the data
+  interface ReservationData {
+    vehicle: string;
+    fullName: string;
+    phone: string;
+    email: string;
+    pickupLocation: string;
+    dropoffLocation: string;
+    startDate: string | number;
+    endDate: string | number;
+    days: number;
+    totalPrice: number;
+  }
+
+  // Extend Window interface
+  declare global {
+    interface Window {
+      populateReceipt: (data: ReservationData) => void;
+      downloadReceiptPDF: () => void;
+    }
+  }
+
+  // Function to populate receipt with reservation data
+  window.populateReceipt = function(data: ReservationData): void {
+    const confirmationId = 'RES-' + Date.now().toString().slice(-8);
+    const today = new Date();
+    
+    const elements = {
+      'receipt-confirmation-id': confirmationId,
+      'receipt-date': today.toLocaleDateString('fr-FR'),
+      'receipt-vehicle': data.vehicle || '-',
+      'receipt-name': data.fullName || '-',
+      'receipt-phone': data.phone || '-',
+      'receipt-email': data.email || '-',
+      'receipt-pickup': data.pickupLocation || '-',
+      'receipt-dropoff': data.dropoffLocation || '-',
+      'receipt-start-date': data.startDate || '-',
+      'receipt-end-date': data.endDate || '-',
+      'receipt-days': data.days || '-',
+      'receipt-total': data.totalPrice || '-',
+      'receipt-footer-total': data.totalPrice || '-'
+    };
+
+    for (const [id, text] of Object.entries(elements)) {
+      const element = document.getElementById(id);
+      if (element && element instanceof HTMLElement) {
+        element.textContent = String(text);
+      }
+    }
+  };
+
+  // Function to download receipt as PDF
+  window.downloadReceiptPDF = function(): void {
+    const element = document.getElementById('receipt-content');
+    if (!element) {
+      console.error('Receipt content element not found');
+      return;
+    }
+
+    const opt = {
+      margin: 5,
+      filename: 'AUTOGO-Reservation-' + Date.now() + '.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4', compress: true },
+      pagebreak: { mode: ['avoid-all'] }
+    };
+    
+    // Make sure html2pdf is loaded
+    const html2pdfLib = (window as any).html2pdf;
+    if (typeof html2pdfLib !== 'undefined') {
+      html2pdfLib().set(opt).from(element).save();
+    } else {
+      console.error('html2pdf library not loaded');
+      alert('Erreur: Impossible de générer le PDF. Veuillez réessayer.');
+    }
+  };
+</script>

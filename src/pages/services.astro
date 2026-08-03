@@ -1,0 +1,475 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const services = [
+  {
+    title: "Location de véhicules",
+    description: "Locations flexibles journalières, hebdomadaires ou mensuelles avec assurance complète. Choisissez parmi notre sélection de véhicules électriques premium.",
+    details: "Options journalières, hebdomadaires ou mensuelles. Assurance tous risques incluse. Service de prise en charge et de retour gratuit."
+  },
+  {
+    title: "Leasing long terme",
+    description: "Véhicules électriques premium en leasing avec entretien complet inclus. Profitez d'une conduite sans souci avec des packages tout compris.",
+    details: "Contrats de location de 6 à 36 mois. Entretien inclus. Véhicule de remplacement fourni."
+  },
+  {
+    title: "Solutions de flotte",
+    description: "Gestion de flotte personnalisée pour les entreprises de toutes tailles. Nous vous aidons à construire et gérer votre flotte électrique idéale.",
+    details: "Devis personnalisés pour votre entreprise. Gestionnaire de compte dédié. Échanges de véhicules simples."
+  },
+  {
+    title: "Livraison",
+    description: "Livraison à domicile ou au bureau pour toutes les locations. Nous vous apportons le véhicule où que vous soyez.",
+    details: "Livraison le jour même disponible. Créneaux de livraison planifiés. Service de récupération."
+  },
+  {
+    title: "Assurance",
+    description: "Packages d'assurance complets pour une tranquillité totale. Conduisez en toute confiance.",
+    details: "Assurance tous risques. Options à franchise zéro. Support réactif 24h/24."
+  },
+  {
+    title: "Support 24/7",
+    description: "Assistance roadside et support client disponibles jour et nuit. Nous sommes toujours là pour vous aider.",
+    details: "Assistance roadside 24h/24. Équipe de support technique. Support d'urgence."
+  }
+];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services | AutoGo - Location Véhicules Électriques</title>
+  </head>
+  <body>
+    <Navbar />
+    
+    <main class="services-page">
+      <div class="page-header">
+        <h1>Services</h1>
+        <p>Des solutions premium pour chaque besoin</p>
+      </div>
+
+      <div class="services-list">
+        {services.map(service => (
+          <div class="service-item">
+            <div class="service-content">
+              <h3>{service.title}</h3>
+              <p class="service-description">{service.description}</p>
+              <p class="service-details">{service.details}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="editorial-section">
+        <div class="editorial-content">
+          <span class="editorial-tag">À la une</span>
+          <h2>Ensemble pour le Climat</h2>
+          <p>Les objectifs climatiques 2030 exigent des mesures urgentes. Notre collaboration avec les partenaires de l'industrie stimule la transition vers une mobilité durable. Ensemble, nous construisons l'avenir du transport zéro émission.</p>
+          <a href="#" class="editorial-link">Rapport Roadmap <span>→</span></a>
+        </div>
+        <div class="editorial-image">
+          <img src="https://admin.kia.ma/storage/images/technologies/71eb73b4e2974f8516e13572fb79e1c5_28032024_042039_02042024_013514.webp" alt="Action climatique" />
+        </div>
+      </div>
+
+      <div class="process-section">
+        <h2>Comment ça marche</h2>
+        <div class="process-steps">
+          <div class="step">
+            <span class="step-number">01</span>
+            <h4>Choisissez votre véhicule</h4>
+            <p>Parcourez notre sélection et trouvez le véhicule parfait pour vos besoins</p>
+          </div>
+          <div class="step">
+            <span class="step-number">02</span>
+            <h4>Réservez en ligne</h4>
+            <p>Sélectionnez vos dates et finalisez votre réservation en quelques minutes</p>
+          </div>
+          <div class="step">
+            <span class="step-number">03</span>
+            <h4>Livraison</h4>
+            <p>Nous livrons à votre adresse ou vous récupérez le véhicule dans nos locaux</p>
+          </div>
+          <div class="step">
+            <span class="step-number">04</span>
+            <h4>Conduisez</h4>
+            <p>Profitez de votre expérience en véhicule électrique premium</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefits-section">
+        <h2>Pourquoi nous choisir</h2>
+        <div class="benefits-grid">
+          <div class="benefit">
+            <h4>Qualité Premium</h4>
+            <p>Uniquement les meilleurs véhicules électriques dans notre flotte</p>
+          </div>
+          <div class="benefit">
+            <h4>Conditions flexibles</h4>
+            <p>Louez d'un jour à aussi longtemps que vous le souhaitez</p>
+          </div>
+          <div class="benefit">
+            <h4>Tout inclus</h4>
+            <p>Assurance, entretien et support inclus</p>
+          </div>
+          <div class="benefit">
+            <h4>Éco-responsable</h4>
+            <p>Flotte 100% électrique pour une conduite durable</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-section">
+        <h2>Questions fréquentes</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h4>Quels documents dois-je fournir ?</h4>
+            <p>Permis de conduire valide, pièce d'identité/passeport et carte de crédit pour le dépôt de garantie</p>
+          </div>
+          <div class="faq-item">
+            <h4>L'assurance est-elle incluse ?</h4>
+            <p>Oui, l'assurance tous risques complète est incluse dans toutes les locations</p>
+          </div>
+          <div class="faq-item">
+            <h4>Puis-je me faire livrer le véhicule ?</h4>
+            <p>Oui, nous proposons la livraison à domicile et au bureau dans toute la ville</p>
+          </div>
+          <div class="faq-item">
+            <h4>Quelle est la politique d'annulation ?</h4>
+            <p>Annulation gratuite jusqu'à 24 heures avant votre réservation</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 700;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f5f5f5;
+    color: #000000;
+    min-height: 100vh;
+  }
+
+  .services-page {
+    padding: 120px 48px 48px;
+  }
+
+  .page-header {
+    margin-bottom: 64px;
+  }
+
+  .page-header h1 {
+    font-size: 74px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .page-header p {
+    font-size: 18px;
+    opacity: 0.7;
+  }
+
+  .services-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-item {
+    padding: 32px 24px;
+    border-bottom: 1px solid #B6FF00;
+  }
+
+  .service-item:first-child {
+    border-top: 1px solid #B6FF00;
+  }
+
+  .service-content h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .service-description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    opacity: 0.9;
+  }
+
+  .service-details {
+    font-size: 14px;
+    color: #B6FF00;
+    opacity: 0.8;
+  }
+
+  .cta-section {
+    text-align: center;
+    margin-top: 48px;
+    padding: 64px;
+    border: 1px solid #B6FF00;
+  }
+
+  .editorial-section {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 32px;
+    margin-top: 80px;
+  }
+
+  .editorial-content {
+    padding: 64px;
+  }
+
+  .editorial-tag {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 24px;
+    opacity: 0.7;
+  }
+
+  .editorial-content h2 {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .editorial-content p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+    opacity: 0.9;
+  }
+
+  .editorial-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .editorial-link span {
+    color: #B6FF00;
+  }
+
+  .editorial-image {
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .editorial-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cta-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .cta-section p {
+    font-size: 18px;
+    opacity: 0.7;
+    margin-bottom: 32px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 16px 48px;
+    background: #B6FF00;
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+  }
+
+  .cta-btn:hover {
+    background: #f5f5f5;
+  }
+
+  .process-section {
+    margin-top: 80px;
+    padding: 64px;
+    border: 1px solid #B6FF00;
+  }
+
+  .process-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .step {
+    text-align: center;
+  }
+
+  .step-number {
+    display: block;
+    font-size: 48px;
+    font-weight: 700;
+    color: #B6FF00;
+    margin-bottom: 16px;
+  }
+
+  .step h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .step p {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  .benefits-section {
+    margin-top: 80px;
+    padding: 64px;
+    background: rgba(182, 255, 0, 0.05);
+  }
+
+  .benefits-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .benefit {
+    text-align: center;
+  }
+
+  .benefit h4 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #B6FF00;
+    margin-bottom: 12px;
+  }
+
+  .benefit p {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  .faq-section {
+    margin-top: 80px;
+    padding: 64px;
+    border: 1px solid #B6FF00;
+  }
+
+  .faq-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 48px;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .faq-item {
+    padding: 24px;
+    border-bottom: 1px solid rgba(182, 255, 0, 0.3);
+  }
+
+  .faq-item h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .faq-item p {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .services-page {
+      padding: 100px 24px 32px;
+    }
+
+    .page-header h1 {
+      font-size: 48px;
+    }
+
+    .service-content h3 {
+      font-size: 24px;
+    }
+
+    .cta-section,
+    .process-section,
+    .benefits-section,
+    .faq-section {
+      padding: 48px 24px;
+    }
+
+    .process-steps,
+    .benefits-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .editorial-section {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .editorial-content {
+      padding: 32px 24px;
+      order: 1;
+    }
+
+    .editorial-content h2 {
+      font-size: 32px;
+    }
+
+    .editorial-content p {
+      font-size: 16px;
+    }
+
+    .editorial-image {
+      padding: 16px 24px;
+      order: 2;
+    }
+  }
+</style>

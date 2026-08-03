@@ -1,0 +1,319 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditions de location | AutoGo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <Navbar />
+    
+    <main class="conditions-page">
+      <div class="page-header">
+        <h1>Conditions de location</h1>
+        <p>Veuillez lire attentivement nos conditions générales avant de réserver</p>
+      </div>
+
+      <div class="content-grid">
+        <div class="content-item">
+          <h2>Éligibilité</h2>
+          <p>Tous les locataires doivent avoir au moins 21 ans. Un permis de conduire valide est requis. Pour les véhicules de luxe, l'âge minimum est de 25 ans.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Documents requis</h2>
+          <p>Permis de conduire valide, passeport ou carte d'identité nationale, et carte de crédit pour le dépôt de garantie. Tous les documents doivent être présentés au moment de la prise en charge.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Assurance</h2>
+          <p>L'assurance tous risques complète est incluse dans toutes les locations. L'assurance couvre les dommages collision, le vol et la responsabilité civile. Des options de réduction de franchise sont disponibles.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Dépôt de garantie</h2>
+          <p>Un dépôt de garantie est requis lors de la prise en charge. Le montant varie selon la catégorie de véhicule. Le dépôt sera remboursé dans les 14 jours suivant le retour, moins tout dommage ou infraction.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Politique de chargement</h2>
+          <p>Tous les véhicules sont livrés avec une charge complète. Retournez le véhicule avec le même niveau de charge pour éviter des frais supplémentaires. La charge à domicile est incluse dans votre location.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Annulation</h2>
+          <p>Annulation gratuite jusqu'à 24 heures avant votre prise en charge prévue. Dans les 24 heures, des frais d'une journée de location s'appliquent. Les réservations non présentées ne sont pas remboursables.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Retour en retard</h2>
+          <p>Les retours en retard sont facturés au tarif journalier. Pour les retards de plus de 2 heures, une journée supplémentaire peut être facturée. Veuillez nous contacter si vous prévoyez d'être en retard.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Politique des dommages</h2>
+          <p>Tout dommage au véhicule au-delà de l'usure normale sera facturé au locataire. Veuillez signaler tout dommage immédiatement pour éviter toute responsabilité.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Utilisation interdite</h2>
+          <p>Le véhicule ne peut pas être utilisé pour des courses, la conduite tout-terrain ou transporté sur des ferries ou camionnettes. Le tabagisme est strictement interdit. Les animaux domestiques ne sont pas autorisés.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Restrictions géographiques</h2>
+          <p>Le véhicule doit être retourné au lieu de prise en charge. Les locations aller-simple sont disponibles sur demande. Les voyages transfrontaliers nécessitent une approbation préalable.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Assistance dépannage</h2>
+          <p>L'assistance roadside 24h/24 est incluse dans toutes les locations. En cas de panne, contactez immédiatement notre support. Nous organiserons le remplacement ou la réparation.</p>
+        </div>
+
+        <div class="content-item">
+          <h2>Modes de paiement</h2>
+          <p>Nous acceptons toutes les principales cartes de crédit et cartes de débit. Les paiements en espèces ne sont pas acceptés pour les dépôts de garantie. Les cartes prépayées ne sont pas éligibles pour les dépôts.</p>
+        </div>
+      </div>
+
+      <div class="download-section">
+        <h2>Télécharger les conditions complètes</h2>
+        <p>Pour les conditions de location complètes, veuillez télécharger notre document complet.</p>
+        <button id="downloadPdf" class="download-btn">Télécharger PDF</button>
+      </div>
+    </main>
+
+    <Footer />
+
+    <script>
+      declare global {
+        interface Window {
+          jspdf: typeof import('jspdf');
+        }
+      }
+
+      document.getElementById('downloadPdf')?.addEventListener('click', async () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        const logoUrl = '/logos/logo.png';
+        
+        try {
+          const logo = await fetch(logoUrl).then(r => r.blob());
+          const logoBase64 = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.readAsDataURL(logo);
+          });
+          
+          doc.addImage(logoBase64, 'PNG', 80, 10, 50, 20);
+        } catch (e) {
+          console.log('Logo not found, using text instead');
+          doc.setFontSize(24);
+          doc.setTextColor(182, 255, 0);
+          doc.text('AutoGo', 105, 25, { align: 'center' });
+        }
+        
+        doc.setFontSize(18);
+        doc.setTextColor(0, 0, 0);
+        doc.text('Conditions de Location', 105, 45, { align: 'center' });
+        
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text('Veuillez lire attentivement nos conditions générales avant de réserver', 105, 52, { align: 'center' });
+        
+        doc.setDrawColor(182, 255, 0);
+        doc.line(20, 60, 190, 60);
+        
+        const conditions = [
+          { title: 'Éligibilité', text: 'Tous les locataires doivent avoir au moins 21 ans. Un permis de conduire valide est requis. Pour les véhicules de luxe, l\'âge minimum est de 25 ans.' },
+          { title: 'Documents requis', text: 'Permis de conduire valide, passeport ou carte d\'identité nationale, et carte de crédit pour le dépôt de garantie. Tous les documents doivent être présentés au moment de la prise en charge.' },
+          { title: 'Assurance', text: 'L\'assurance tous risques complète est incluse dans toutes les locations. L\'assurance couvre les dommages collision, le vol et la responsabilité civile. Des options de réduction de franchise sont disponibles.' },
+          { title: 'Dépôt de garantie', text: 'Un dépôt de garantie est requis lors de la prise en charge. Le montant varie selon la catégorie de véhicule. Le dépôt sera remboursé dans les 14 jours suivant le retour.' },
+          { title: 'Politique de chargement', text: 'Tous les véhicules sont livrés avec une charge complète. Retournez le véhicule avec le même niveau de charge pour éviter des frais supplémentaires.' },
+          { title: 'Annulation', text: 'Annulation gratuite jusqu\'à 24 heures avant votre prise en charge prévue. Dans les 24 heures, des frais d\'une journée de location s\'appliquent.' },
+          { title: 'Retour en retard', text: 'Les retours en retard sont facturés au tarif journalier. Pour les retards de plus de 2 heures, une journée supplémentaire peut être facturée.' },
+          { title: 'Politique des dommages', text: 'Tout dommage au véhicule au-delà de l\'usure normale sera facturé au locataire. Veuillez signaler tout dommage immédiatement.' },
+          { title: 'Utilisation interdite', text: 'Le véhicule ne peut pas être utilisé pour des courses, la conduite tout-terrain ou transporté sur des ferries. Le tabagisme est strictement interdit. Les animaux ne sont pas autorisés.' },
+          { title: 'Restrictions géographiques', text: 'Le véhicule doit être retourné au lieu de prise en charge. Les locations aller-simple sont disponibles sur demande. Les voyages transfrontaliers nécessitent une approbation préalable.' },
+          { title: 'Assistance dépannage', text: 'L\'assistance roadside 24h/24 est incluse dans toutes les locations. En cas de panne, contactez immédiatement notre support.' },
+          { title: 'Modes de paiement', text: 'Nous acceptons toutes les principales cartes de crédit et cartes de débit. Les paiements en espèces ne sont pas acceptés pour les dépôts de garantie.' }
+        ];
+        
+        let y = 75;
+        conditions.forEach((item) => {
+          if (y > 270) {
+            doc.addPage();
+            y = 20;
+          }
+          
+          doc.setFontSize(12);
+          doc.setTextColor(0, 0, 0);
+          doc.setFont('helvetica', 'bold');
+          doc.text(item.title, 20, y);
+          
+          doc.setFontSize(9);
+          doc.setTextColor(80, 80, 80);
+          doc.setFont('helvetica', 'normal');
+          
+          const lines = doc.splitTextToSize(item.text, 170);
+          doc.text(lines, 20, y + 7);
+          
+          y += 7 + (lines.length * 5) + 10;
+        });
+        
+        doc.save('conditions-location-autogo.pdf');
+      });
+    </script>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f5f5f5;
+    color: #000000;
+    min-height: 100vh;
+  }
+
+  .conditions-page {
+    padding: 120px 48px 48px;
+  }
+
+  .page-header {
+    margin-bottom: 64px;
+  }
+
+  .page-header h1 {
+    font-size: 74px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .page-header p {
+    font-size: 18px;
+    opacity: 0.7;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .content-item {
+    padding: 32px;
+    border-right: 1px solid #B6FF00;
+    border-bottom: 1px solid #B6FF00;
+  }
+
+  .content-item:nth-child(3n) {
+    border-right: none;
+  }
+
+  .content-item:last-child,
+  .content-item:nth-last-child(-n+3) {
+    border-bottom: none;
+  }
+
+  .content-item h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .content-item p {
+    font-size: 14px;
+    line-height: 1.7;
+    opacity: 0.8;
+  }
+
+  .download-section {
+    text-align: center;
+    padding: 64px;
+    margin-top: 64px;
+    border: 1px solid #B6FF00;
+  }
+
+  .download-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .download-section p {
+    font-size: 16px;
+    opacity: 0.7;
+    margin-bottom: 32px;
+  }
+
+  .download-btn {
+    display: inline-block;
+    padding: 16px 48px;
+    background: #B6FF00;
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+  }
+
+  .download-btn:hover {
+    background: #f5f5f5;
+  }
+
+  @media (max-width: 1024px) {
+    .content-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content-item:nth-child(3n) {
+      border-right: 1px solid #B6FF00;
+    }
+
+    .content-item:nth-child(2n) {
+      border-right: none;
+    }
+
+    .content-item:last-child {
+      border-bottom: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .conditions-page {
+      padding: 100px 24px 32px;
+    }
+
+    .page-header h1 {
+      font-size: 48px;
+    }
+
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .content-item {
+      border-right: none;
+      border-bottom: 1px solid #B6FF00;
+    }
+
+    .content-item:last-child {
+      border-bottom: none;
+    }
+
+    .download-section {
+      padding: 48px 24px;
+    }
+  }
+</style>

@@ -1,0 +1,149 @@
+[
+   {
+     "id": 1,
+     "name": "208",
+     "brand": "Peugeot",
+     "year": 2024,
+     "slug": "peugeot-208",
+     "image": "https://res.cloudinary.com/dqlr9mio4/image/upload/v1776687145/erasebg-transformed-1_m1qph0.avif",
+     "description": "Citadine économique et écologique, parfaite pour la ville",
+     "mileage": "0 km",
+     "transmission": "Automatique",
+     "fuelType": "Électrique",
+     "category": "Compact",
+     "specs": {
+       "motor": "Moteur électrique 115 ch (84 kW)",
+       "battery": "Batterie lithium-ion 51 kWh",
+       "autonomy": "350 km (WLTP)",
+       "charging": "Recharge rapide 100 kW DC",
+       "acceleration": "0-100 km/h en 8,1 s",
+       "topSpeed": "135 km/h"
+     }
+   },
+   {
+     "id": 2,
+     "name": "Logan",
+     "brand": "Dacia",
+     "year": 2024,
+     "slug": "dacia-logan",
+     "image": "https://res.cloudinary.com/dqlr9mio4/image/upload/v1776686149/JiRNGocgD2jqDjNSvDk3_iw7rt6.webp",
+     "description": "Berline spacieuse et économique",
+     "mileage": "0 km",
+     "transmission": "Manuelle",
+     "fuelType": "Essence",
+     "category": "Sedan",
+     "specs": {
+       "engine": "1.0 L 3 cylindres TCe 100",
+       "power": "100 ch (74 kW)",
+       "torque": "170 Nm",
+       "fuelConsumption": "5,5 L/100km",
+       "topSpeed": "180 km/h",
+       "trunkCapacity": "510 L"
+     }
+   },
+   {
+     "id": 3,
+     "name": "Rifter",
+     "brand": "Peugeot",
+     "year": 2024,
+     "slug": "peugeot-rifter",
+     "image": "https://res.cloudinary.com/dqlr9mio4/image/upload/v1776687145/erasebg-transformed_gxznqk.avif",
+     "description": "SUV familial spacieux et flexible",
+     "mileage": "0 km",
+     "transmission": "Automatique",
+     "fuelType": "Diesel",
+     "category": "Family",
+     "specs": {
+       "engine": "1.5 BlueHDi 130",
+       "power": "130 ch (96 kW)",
+       "torque": "300 Nm",
+       "fuelConsumption": "5,0 L/100km",
+       "topSpeed": "185 km/h",
+       "seatingCapacity": "7 places"
+     }
+   },
+ {
+       "id": 4,
+       "name": "Tonale",
+       "brand": "Alfa Romeo",
+       "year": 2024,
+       "slug": "alfa-romeo-tonale",
+       "image": "/cars/Trim-Tonale_Speciale.png",
+       "description": "SUV premium italien élégant et performant",
+       "mileage": "0 km",
+       "transmission": "Automatique",
+       "fuelType": "Hybride",
+       "category": "SUV",
+       "specs": {
+         "engine": "1.3L Turbo MultiAir + moteur électrique 48V",
+         "power": "160 ch (118 kW) - 225 ch (165 kW) selon finition",
+         "torque": "380 Nm (version Q4)",
+         "acceleration": "0-100 km/h en 7,0 s (Q4)",
+         "topSpeed": "215 km/h",
+         "battery": "Batterie 48V 0,8 kWh"
+       }
+     },
+     {
+       "id": 5,
+       "name": "Range Rover Sport",
+       "brand": "Land Rover",
+       "year": 2025,
+       "slug": "range-rover-sport",
+       "image": "https://res.cloudinary.com/dqlr9mio4/image/upload/v1778765210/front45_v9iudu.png",
+       "description": "SUV de luxe britannique puissant et élégant",
+       "mileage": "0 km",
+       "transmission": "Automatique",
+       "fuelType": "Essence",
+       "category": "SUV",
+       "specs": {
+         "engine": "3.0L Supercharged V6",
+         "power": "355 ch (262 kW)",
+         "torque": "450 Nm",
+         "acceleration": "0-100 km/h en 6,5 s",
+         "topSpeed": "225 km/h",
+         "trunkCapacity": "850 L"
+       }
+     },
+     {
+       "id": 6,
+       "name": "Tourneo",
+       "brand": "Ford",
+       "year": 2024,
+       "slug": "ford-tourneo",
+       "image": "https://res.cloudinary.com/dqlr9mio4/image/upload/v1778766455/ford_24tourneocustmtitml2h1awdvp2bfr_angularfront_oy1xqd.webp",
+       "description": "Monospace familial spacieux et confortable",
+       "mileage": "0 km",
+       "transmission": "Manuelle",
+       "fuelType": "Diesel",
+       "category": "Family",
+       "specs": {
+         "engine": "2.0L EcoBlue TDCi",
+         "power": "150 ch (110 kW)",
+         "torque": "380 Nm",
+         "fuelConsumption": "5,2 L/100km",
+         "topSpeed": "190 km/h",
+         "seatingCapacity": "9 places"
+       }
+     },
+     {
+       "id": 7,
+       "name": "Partner",
+       "brand": "Peugeot",
+       "year": 2024,
+       "slug": "peugeot-partner",
+       "image": "https://res.cloudinary.com/dqlr9mio4/image/upload/v1778767011/partner-640-X-360-PX-PAGINA-WEB-C1-2026-2_xzalxp.webp",
+       "description": "Fourgon compact pratique et économique",
+       "mileage": "0 km",
+       "transmission": "Manuelle",
+       "fuelType": "Diesel",
+       "category": "Van",
+       "specs": {
+         "engine": "1.5L BlueHDi 100",
+         "power": "100 ch (74 kW)",
+         "torque": "250 Nm",
+         "fuelConsumption": "4,5 L/100km",
+         "topSpeed": "170 km/h",
+         "trunkCapacity": "1200 L"
+       }
+     }
+ ]
